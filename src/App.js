@@ -1,5 +1,4 @@
-import React from 'react';
-import PropTypes from 'prop-types'
+import React, { Component } from 'react';
 
 // Class Component
 // class App extends Component {
@@ -13,34 +12,33 @@ import PropTypes from 'prop-types'
 //   }
 // }
 
-// Functional Component
-const App = () => {
-  const profiles = [
-    { name: "Taro", age: 10 },
-    { name: "Hanako", age: 5 },
-    { name: "Yuki" }
-  ]
-  return (
-    <React.Fragment>
-      {
-        profiles.map((profile, index) => {
-          return <User name={profile.name} age={profile.age} key={index} />
-        })
-      }
-    </React.Fragment>
-  )
-}
-const User = (props) => {
-  return <div>Hi I am {props.name} and {props.age} yeas old.</div>
-}
+const App = () => (<Counter></Counter>)
 
-User.propTypes = {
-  name: PropTypes.string,
-  age: PropTypes.number.isRequired
-}
+class Counter extends Component {
+  constructor(props) {
+    super(props)
+    console.log(this.state)
+    this.state = { count: 0 }
+  }
 
-User.defaultProps = {
-  age: 1
+  handlePlusButton = () => {
+    this.setState({ count: this.state.count + 1 })
+  }
+
+  handleMinusButton = () => {
+    this.setState({ count: this.state.count - 1 })
+  }
+
+  render() {
+    console.log("render")
+    return (
+      <React.Fragment>
+        <div>Counter: {this.state.count}</div>
+        <button onClick={this.handlePlusButton}>+1</button>
+        <button onClick={this.handleMinusButton}>-1</button>
+      </React.Fragment>
+    )
+  }
 }
 
 export default App;
