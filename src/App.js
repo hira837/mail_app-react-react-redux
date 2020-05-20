@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types'
 
 // Class Component
 // class App extends Component {
@@ -20,17 +21,22 @@ const App = () => {
     { name: "Yuki" }
   ]
   return (
-    <div>
+    <React.Fragment>
       {
         profiles.map((profile, index) => {
           return <User name={profile.name} age={profile.age} key={index} />
         })
       }
-    </div>
+    </React.Fragment>
   )
 }
 const User = (props) => {
-return <div>Hi I am {props.name} and {props.age} yeas old.</div>
+  return <div>Hi I am {props.name} and {props.age} yeas old.</div>
+}
+
+User.propTypes = {
+  name: PropTypes.string,
+  age: PropTypes.number.isRequired
 }
 
 User.defaultProps = {
