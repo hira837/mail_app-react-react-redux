@@ -1,5 +1,5 @@
 // reducerの結合
 import { combineReducers } from "redux";
-import count from "./count";
+import mails from "./mails";
 
-export default combineReducers({ count });
+export default combineReducers({ mails });
