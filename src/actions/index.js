@@ -1,5 +1,3 @@
-// import axios from 'axios'
-
 // Action Creator・・・Actionを定義してactionをreturnする関数
 export const INCREMENT = "INCREMENT"
 export const DECREMENT = "DECREMENT"
@@ -14,12 +12,15 @@ export const decrement = () => ({
   type: "DECREMENT",
 })
 
-const ROOT_URL = "https://udemy-utils.herokuapp.com/api/v1"
-const QUERYSTRING = "?token=token123"
+// APIがある場合は指定
+// const ROOT_URL = "https://udemy-utils.herokuapp.com/api/v1"
+// const QUERYSTRING = "?token=token123"
 export const readMails = () => async dispatch => {
-    const response = await (
-      await fetch(`${ROOT_URL}/events${QUERYSTRING}`)
-    ).json()
+    // const response = await (
+    //   await fetch(`${ROOT_URL}/events${QUERYSTRING}`)
+    // ).json()
+    const response = await ( await fetch('data/allMails.json')).json()
+    console.log(response)
     dispatch({ type: READ_MAILS, response })
 }
 // コンポーネントで使うのでexportしておく

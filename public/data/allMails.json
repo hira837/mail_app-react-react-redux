@@ -1,0 +1,52 @@
+[
+  {
+    "id": 1,
+    "title": "Let's have an event 1!",
+    "body": "This is the body for event 1."
+  },
+  {
+    "id": 2,
+    "title": "Let's have an event 2!",
+    "body": "This is the body for event 2."
+  },
+  {
+    "id": 3,
+    "title": "Let's have an event 3!",
+    "body": "This is the body for event 3."
+  },
+  {
+    "id": 4,
+    "title": "Let's have an event 4!",
+    "body": "This is the body for event 4."
+  },
+  {
+    "id": 5,
+    "title": "Let's have an event 5!",
+    "body": "This is the body for event 5."
+  },
+  {
+    "id": 6,
+    "title": "Let's have an event 6!",
+    "body": "This is the body for event 6."
+  },
+  {
+    "id": 7,
+    "title": "Let's have an event 7!",
+    "body": "This is the body for event 7."
+  },
+  {
+    "id": 8,
+    "title": "Let's have an event 8!",
+    "body": "This is the body for event 8."
+  },
+  {
+    "id": 9,
+    "title": "Let's have an event 9!",
+    "body": "This is the body for event 9."
+  },
+  {
+    "id": 10,
+    "title": "Let's have an event 10!",
+    "body": "This is the body for event 10."
+  }
+]
