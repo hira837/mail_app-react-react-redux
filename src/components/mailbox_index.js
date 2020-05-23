@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import _ from 'lodash'
+import { Link } from 'react-router-dom'
 
 import { increment, decrement, readMails } from '../actions'
 
@@ -34,6 +35,7 @@ class MailboxIndex extends Component {
           <tbody>{this.renderEvents()}</tbody>
         </table>
         <div>{console.log(props.mails)}</div>
+        <Link to="/mailbox/create">Create a New Mail</Link>
       </React.Fragment>
     );
   }
