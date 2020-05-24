@@ -5,6 +5,8 @@ export const INCREMENT = "INCREMENT"
 export const DECREMENT = "DECREMENT"
 export const READ_MAILS = "READ_MAILS"
 export const CREATE_MAILS = "CREATE_MAILS"
+export const GET_MAIL = "GET_MAIL"
+export const DELETE_MAIL = "DELETE_MAIL"
 
 // Action・・・typeというkeyをもつオブジェクト
 export const increment = () => ({
@@ -56,7 +58,17 @@ export const createMails = values => async dispatch => {
   //     body: JSON.stringify(data), // 本文のデータ型は "Content-Type" ヘッダーと一致する必要があります
   //   }).then((response) => response.json()); // レスポンスの JSON を解析
   // }
-};
+}
+
+export const getMail = id => async dispatch => {
+  const response = await axios.get(`${ROOT_URL}/events/${id}${QUERYSTRING}`);
+  dispatch({ type: GET_MAIL, response });
+}
+
+export const deleteMail = id => async dispatch => {
+  await axios.delete(`${ROOT_URL}/events/${id}${QUERYSTRING}`);
+  dispatch({ type: DELETE_MAIL, id });
+}
 // コンポーネントで使うのでexportしておく
 // 再利用するので(REDUCERで使う)ので変数に格納し、exportしておく
 // view側でインポート。あるイベントに対し、これらのアクションを実行して、適切な状態遷移を実行するための仕組み

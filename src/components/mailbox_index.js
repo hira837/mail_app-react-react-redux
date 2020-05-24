@@ -25,7 +25,6 @@ class MailboxIndex extends Component {
   }
   
   render() {
-    const props = this.props;
     return (
       <React.Fragment>
         <table>
@@ -38,7 +37,7 @@ class MailboxIndex extends Component {
           </thead>
           <tbody>{this.renderEvents()}</tbody>
         </table>
-        <div>{console.log(props.mails)}</div>
+        {/* <div>{console.log(props.mails)}</div> */}
         <Link to="/mailbox/create">Create a New Mail</Link>
       </React.Fragment>
     );
