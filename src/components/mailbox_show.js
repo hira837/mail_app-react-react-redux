@@ -3,10 +3,11 @@ import { connect } from "react-redux";
 import { Field, reduxForm } from 'redux-form';
 import { Link } from "react-router-dom";
 
-import { createMails } from "../actions";
+import { showMails, deleteMails, putMails } from "../actions";
 
-class mailboxCreate extends Component {
+class mailboxShow extends Component {
   constructor(props) {
+    console.log('mailboxShow')
     super(props)
     this.onSubmit = this.onSubmit.bind(this)
   }
@@ -22,7 +23,7 @@ class mailboxCreate extends Component {
   }
 
   async onSubmit(values) {
-    await this.props.createMails(values);
+    // await this.props.createMails(values);
     this.props.history.push("/");
   }
 
@@ -53,8 +54,8 @@ const validate = values => {
   return errors
 }
 
-const mapDispatchToProps = { createMails };
+// const mapDispatchToProps = { showMails };
 
-export default connect(null, mapDispatchToProps)(
-  reduxForm({ validate, form: 'createMailsForm' })(mailboxCreate)
+export default connect(null, null)(
+  reduxForm({ validate, form: 'createMailsForm' })(mailboxShow)
 )

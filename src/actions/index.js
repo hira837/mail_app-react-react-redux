@@ -30,12 +30,32 @@ export const readMails = () => async dispatch => {
 
 export const createMails = values => async dispatch => {
   const response = await axios.post(`${ROOT_URL}/events${QUERYSTRING}`, values);
-  // const response = await (await fetch("data/allMails.json"),{
-  //   method: "POST", 
+  // const response = await (await fetch(`${ROOT_URL}/events${QUERYSTRING}`, values= {}),{
+  //   method: "POST",
   //   contentType: "application/json",
-  //   body: JSON.stringify(values)
+  //   headers: {"Content-Type": "application/json; charset=utf-8"},
+  //   body: JSON.stringify(values),
   // }).json();
-    dispatch({ type: CREATE_MAILS, response });
+  console.log(response);
+  dispatch({ type: CREATE_MAILS, response });
+
+  // postData(`${ROOT_URL}/events${QUERYSTRING}`, values)
+  //   .then((values) => {
+  //     const response = JSON.stringify(values);
+  //     console.log(response)
+  //     dispatch({ type: CREATE_MAILS, response });
+  //   }) 
+  //   .catch((error) => console.error(error));
+
+  // function postData(url = ``, data = {}) {
+  //   return fetch(url, {
+  //     method: "POST", // *GET, POST, PUT, DELETE, etc.
+  //     headers: {
+  //       "Content-Type": "application/json; charset=utf-8",
+  //     },
+  //     body: JSON.stringify(data), // 本文のデータ型は "Content-Type" ヘッダーと一致する必要があります
+  //   }).then((response) => response.json()); // レスポンスの JSON を解析
+  // }
 };
 // コンポーネントで使うのでexportしておく
 // 再利用するので(REDUCERで使う)ので変数に格納し、exportしておく

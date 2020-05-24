@@ -4,22 +4,30 @@ import { createStore, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux'
 import thunk from 'redux-thunk'
 import { BrowserRouter, Route, Switch } from 'react-router-dom'
+import { composeWithDevTools } from 'redux-devtools-extension'
 
 import './index.css';
 import reducer from './reducers'
 import MailboxIndex from './components/mailbox_index'
 import MailboxCreate from './components/mailbox_create'
-import * as serviceWorker from './serviceWorker';
+import MailboxShow from './components/mailbox_show'
+import * as serviceWorker from './serviceWorker'
 
-const store = createStore(reducer, applyMiddleware(thunk))
+const enhancer =
+  process.env.NODE_ENV === "development"
+    ? composeWithDevTools(applyMiddleware(thunk))
+    : applyMiddleware(thunk)
+const store = createStore(reducer, enhancer)
 
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
       <BrowserRouter>
         <Switch>
-          <Route exact path="/mailbox/create" component={MailboxCreate} />
+          <Route path="/mailbox/create" component={MailboxCreate} />
+          <Route path="/mailbox/:id" component={MailboxShow} />
           <Route exact path="/" component={MailboxIndex} />
+          <Route exact path="/mailbox" component={MailboxIndex} />
         </Switch>
       </BrowserRouter>
     </Provider>

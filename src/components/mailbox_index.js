@@ -14,7 +14,11 @@ class MailboxIndex extends Component {
     return _.map(this.props.mails, (mail) => (
       <tr key={mail.id}>
         <td>{mail.id}</td>
-        <td>{mail.title}</td>
+        <td>
+          <Link to={`/mailbox/${mail.id}`}>
+          {mail.title}
+          </Link>
+        </td>
         <td>{mail.body}</td>
       </tr>
     ))
