@@ -2,6 +2,16 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import _ from 'lodash'
 import { Link } from 'react-router-dom'
+import {
+  Table,
+  TableBody,
+  TableHeader,
+  TableHeaderColumn,
+  TableRow,
+  TableRowColumn
+} from 'material-ui/Table'
+import FloatingActionButton from 'material-ui/FloatingActionButton'
+import ContentAdd from 'material-ui/svg-icons/content/add'
 
 import { increment, decrement, readMails } from '../actions'
 
@@ -12,33 +22,44 @@ class MailboxIndex extends Component {
 
   renderEvents() {
     return _.map(this.props.mails, (mail) => (
-      <tr key={mail.id}>
-        <td>{mail.id}</td>
-        <td>
+      <TableRow key={mail.id}>
+        <TableRowColumn>{mail.id}</TableRowColumn>
+        <TableRowColumn>
           <Link to={`/mailbox/${mail.id}`}>
           {mail.title}
           </Link>
-        </td>
-        <td>{mail.body}</td>
-      </tr>
+        </TableRowColumn>
+        <TableRowColumn>{mail.body}</TableRowColumn>
+      </TableRow>
     ))
   }
   
   render() {
+    const style = {
+      position: 'fixed',
+      right: 12,
+      bottom: 12
+    }
     return (
       <React.Fragment>
-        <table>
-          <thead>
-            <tr>
-              <th>ID</th>
-              <th>Title</th>
-              <th>Body</th>
-            </tr>
-          </thead>
-          <tbody>{this.renderEvents()}</tbody>
-        </table>
-        {/* <div>{console.log(props.mails)}</div> */}
-        <Link to="/mailbox/create">Create a New Mail</Link>
+        <FloatingActionButton
+          containerElement={<Link to="/mailbox/create"></Link>}
+          style = {style}
+        >
+          <ContentAdd />
+        </FloatingActionButton>
+        <Table>
+          <TableHeader displaySelectAll={false} adjustForCheckbox={false}>
+            <TableRow>
+              <TableHeaderColumn>ID</TableHeaderColumn>
+              <TableHeaderColumn>Title</TableHeaderColumn>
+              <TableHeaderColumn>Body</TableHeaderColumn>
+            </TableRow>
+          </TableHeader>
+          <TableBody displayRowCheckbox={false}>
+            {this.renderEvents()}
+          </TableBody>
+        </Table>
       </React.Fragment>
     );
   }

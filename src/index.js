@@ -5,6 +5,7 @@ import { Provider } from 'react-redux'
 import thunk from 'redux-thunk'
 import { BrowserRouter, Route, Switch } from 'react-router-dom'
 import { composeWithDevTools } from 'redux-devtools-extension'
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 
 import './index.css';
 import reducer from './reducers'
@@ -21,16 +22,18 @@ const store = createStore(reducer, enhancer)
 
 ReactDOM.render(
   <React.StrictMode>
-    <Provider store={store}>
-      <BrowserRouter>
-        <Switch>
-          <Route path="/mailbox/create" component={MailboxCreate} />
-          <Route path="/mailbox/:id" component={MailboxShow} />
-          <Route exact path="/" component={MailboxIndex} />
-          <Route exact path="/mailbox" component={MailboxIndex} />
-        </Switch>
-      </BrowserRouter>
-    </Provider>
+    <MuiThemeProvider>
+      <Provider store={store}>
+        <BrowserRouter>
+          <Switch>
+            <Route path="/mailbox/create" component={MailboxCreate} />
+            <Route path="/mailbox/:id" component={MailboxShow} />
+            <Route exact path="/" component={MailboxIndex} />
+            <Route exact path="/mailbox" component={MailboxIndex} />
+          </Switch>
+        </BrowserRouter>
+      </Provider>
+    </MuiThemeProvider>
   </React.StrictMode>,
   document.getElementById("root")
 );

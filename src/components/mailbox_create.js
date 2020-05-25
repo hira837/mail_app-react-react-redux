@@ -1,9 +1,11 @@
-import React, { Component } from "react";
-import { connect } from "react-redux";
-import { Field, reduxForm } from 'redux-form';
-import { Link } from "react-router-dom";
+import React, { Component } from 'react'
+import { connect } from 'react-redux'
+import { Field, reduxForm } from 'redux-form'
+import { Link } from 'react-router-dom'
+import RaisedButton from 'material-ui/RaisedButton'
+import TextField from 'material-ui/TextField'
 
-import { createMails } from "../actions";
+import { createMails } from '../actions'
 
 class mailboxCreate extends Component {
   constructor(props) {
@@ -14,10 +16,14 @@ class mailboxCreate extends Component {
     const { input, label, type, meta: { touched, error } } = field
 
     return (
-      <div>
-        <input {...input} placeholder={label} type={type} />
-        {touched && error && <span>{error}</span>}
-      </div>
+      <TextField
+        hintText={label}
+        floatingLabelText={label}
+        type={type}
+        errorText={touched && error}
+        {...input}
+        fullWidth={true}
+      />
     )
   }
 
@@ -28,16 +34,16 @@ class mailboxCreate extends Component {
 
   render() {
     const { handleSubmit, pristine, submitting, invalid } = this.props
+    const style = { margin: 12 }
 
-    console.log(submitting)
     return (
       <form onSubmit={handleSubmit(this.onSubmit)}>
         <div><Field label="Title" name="title" tyle="text" component={this.renderField} /></div>
         <div><Field label="Body" name="body" tyle="text" component={this.renderField} /></div>
         
         <div>
-          <input type="submit" value="Submit" disabled={pristine || submitting || invalid} />
-          <Link to="/" >Cancel</Link>
+          <RaisedButton label="Submit" style={style} type="submit" disabled={pristine || submitting || invalid} />
+          <RaisedButton label="Cancel" style={style} containerElement={<Link to="/" />} />
         </div>
       </form>
     )
