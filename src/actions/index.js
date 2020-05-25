@@ -1,12 +1,11 @@
 import axios from 'axios'
 
 // Action Creator・・・Actionを定義してactionをreturnする関数
-export const INCREMENT = "INCREMENT"
-export const DECREMENT = "DECREMENT"
 export const READ_MAILS = "READ_MAILS"
-export const CREATE_MAILS = "CREATE_MAILS"
+export const CREATE_MAIL = "CREATE_MAIL"
 export const GET_MAIL = "GET_MAIL"
 export const DELETE_MAIL = "DELETE_MAIL"
+export const UPDATE_MAIL = "UPDATE_MAIL"
 
 // Action・・・typeというkeyをもつオブジェクト
 export const increment = () => ({
@@ -39,7 +38,7 @@ export const createMails = values => async dispatch => {
   //   body: JSON.stringify(values),
   // }).json();
   console.log(response);
-  dispatch({ type: CREATE_MAILS, response });
+  dispatch({ type: CREATE_MAIL, response });
 
   // postData(`${ROOT_URL}/events${QUERYSTRING}`, values)
   //   .then((values) => {
@@ -68,6 +67,11 @@ export const getMail = id => async dispatch => {
 export const deleteMail = id => async dispatch => {
   await axios.delete(`${ROOT_URL}/events/${id}${QUERYSTRING}`);
   dispatch({ type: DELETE_MAIL, id });
+}
+
+export const putMail = values => async dispatch => {
+  await axios.put(`${ROOT_URL}/events/${values.id}${QUERYSTRING}`, values);
+  dispatch({ type: UPDATE_MAIL, values });
 }
 // コンポーネントで使うのでexportしておく
 // 再利用するので(REDUCERで使う)ので変数に格納し、exportしておく

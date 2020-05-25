@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { Field, reduxForm } from 'redux-form';
 import { Link } from "react-router-dom";
 
-import { getMail, deleteMail, putMails } from "../actions";
+import { getMail, deleteMail, putMail } from "../actions";
 
 class mailboxShow extends Component {
   constructor(props) {
@@ -30,27 +30,26 @@ class mailboxShow extends Component {
   }
 
   async onSubmit(values) {
-    // await this.props.createMails(values);
+    await this.props.putMail(values);
     this.props.history.push("/");
   }
 
   async onDeleteClick() {
     const { id } = this.props.match.params
-    // await this.props.deleteMails(id)
+    await this.props.deleteMail(id)
     this.props.history.push("/");
   }
 
   render() {
-    const { handleSubmit, pristine, submitting } = this.props
+    const { handleSubmit, pristine, submitting, invalid } = this.props
 
-    console.log(submitting)
     return (
       <form onSubmit={handleSubmit(this.onSubmit)}>
         <div><Field label="Title" name="title" tyle="text" component={this.renderField} /></div>
         <div><Field label="Body" name="body" tyle="text" component={this.renderField} /></div>
         
         <div>
-          <input type="submit" value="Submit" disabled={pristine} />
+          <input type="submit" value="Submit" disabled={pristine || submitting || invalid} />
           <Link to="/" >Cancel</Link>
           <Link to="/" onClick={this.onDeleteClick}>Delete</Link>
         </div>
@@ -73,7 +72,7 @@ const mapStateToProps = (state, ownProps) => {
   return { initialValues: mail, mail }
 }
 
-const mapDispatchToProps = { deleteMail, getMail };
+const mapDispatchToProps = { deleteMail, getMail, putMail };
 
 export default connect(mapStateToProps, mapDispatchToProps)(
   reduxForm({ validate, form: 'showMailsForm', enableReinitialize: true })(mailboxShow)
