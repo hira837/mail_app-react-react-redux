@@ -12,17 +12,18 @@ import {
 } from 'material-ui/Table'
 import FloatingActionButton from 'material-ui/FloatingActionButton'
 import ContentAdd from 'material-ui/svg-icons/content/add'
-import { createMuiTheme } from "@material-ui/core/styles";
-import { ThemeProvider } from "@material-ui/styles";
-import { purple } from "@material-ui/core/colors";
 import Button from '@material-ui/core/Button'
+import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown'
+import ArrowDropUpIcon from '@material-ui/icons/ArrowDropUp'
+import { makeStyles } from '@material-ui/core/styles'
 
-import { readMails, sortByDate } from '../actions'
+import { readMails, sortByAsc, sortByDesc } from '../actions'
 
 class MailboxIndex extends Component {
   constructor(props) {
     super(props)
     this.orderByDate = this.orderByDate.bind(this)
+    this.state = { sorted: true }
   }
   componentDidMount() {
     this.props.readMails()
@@ -48,7 +49,14 @@ class MailboxIndex extends Component {
   }
 
   async orderByDate() {
-    await this.props.sortByDate()
+    await this.setState((prevState) => ({
+      sorted: !prevState.sorted
+    }))
+    if(this.state.sorted) {
+      this.props.sortByDesc()
+    } else {
+      this.props.sortByAsc()
+    }
   }
   
   render() {
@@ -56,13 +64,26 @@ class MailboxIndex extends Component {
       position: 'fixed',
       right: 12,
       bottom: 12,
-      maincolor: purple
     }
+    const useStyles = makeStyles((theme) => ({
+      root: {
+        display: "flex",
+        justifyContent: "flex-start",
+        alignItems: "center",
+        flexDirection: "row",
+        "& > *": {
+          margin: theme.spacing(1),
+        },
+      },
+    }));
+    const ascButton = <ArrowDropUpIcon />,
+          descButton = <ArrowDropDownIcon />;
     return (
       <React.Fragment>
-        <div style={{ fontWeight: 700 }}>Results: {this.returnMailsLength()} mails</div>
+        <div style={{ fontWeight: 700 }}>
+          Results: {this.returnMailsLength()} mails
+        </div>
         <Button onClick={this.orderByDate}>日付並び替え</Button>
-        {/* <Button>日付並び替え</Button> */}
         <FloatingActionButton
           containerElement={<Link to="/mailbox/create"></Link>}
           style={style}
@@ -75,7 +96,10 @@ class MailboxIndex extends Component {
               <TableHeaderColumn>From</TableHeaderColumn>
               <TableHeaderColumn>To</TableHeaderColumn>
               <TableHeaderColumn>Subject</TableHeaderColumn>
-              <TableHeaderColumn>Date</TableHeaderColumn>
+              <TableHeaderColumn className={useStyles.root}>
+                <div>Date</div>
+                {this.state.sorted ? ascButton : descButton}
+              </TableHeaderColumn>
             </TableRow>
           </TableHeader>
           <TableBody displayRowCheckbox={false}>
@@ -92,6 +116,6 @@ const mapStateToProps = state => ({ mails: state.mails })
 // const mapDispatchToProps = dispatch => ({
 //   readMails: () => dispatch(readMails())
 // })
-const mapDispatchToProps = ({ readMails, sortByDate })
+const mapDispatchToProps = ({ readMails, sortByAsc, sortByDesc })
 
 export default connect(mapStateToProps, mapDispatchToProps)(MailboxIndex)

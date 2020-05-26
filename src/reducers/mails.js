@@ -1,5 +1,5 @@
 import _ from 'lodash'
-import { READ_MAILS, DELETE_MAIL, GET_MAIL, UPDATE_MAIL, CREATE_MAIL, SORT_BY_DATE } from '../actions';
+import { READ_MAILS, DELETE_MAIL, GET_MAIL, UPDATE_MAIL, CREATE_MAIL, SORT_BY_ASC, SORT_BY_DESC} from '../actions';
 
 export default (mails = {}, action) => {
   switch (action.type) {
@@ -17,8 +17,10 @@ export default (mails = {}, action) => {
       console.log(action.id, "delete reducer");
       delete mails[action.id];
       return { ...mails };
-    case SORT_BY_DATE:
+    case SORT_BY_ASC:
       return _.orderBy(action.response, 'date', 'asc')
+    case SORT_BY_DESC:
+      return _.orderBy(action.response, "date", "desc");
     default:
       return mails;
   }

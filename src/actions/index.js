@@ -6,7 +6,8 @@ export const CREATE_MAIL = "CREATE_MAIL"
 export const GET_MAIL = "GET_MAIL"
 export const DELETE_MAIL = "DELETE_MAIL"
 export const UPDATE_MAIL = "UPDATE_MAIL"
-export const SORT_BY_DATE = "SORT_BY_DATE"
+export const SORT_BY_ASC = "SORT_BY_ASC"
+export const SORT_BY_DESC = "SORT_BY_DESC"
 
 // Action・・・typeというkeyをもつオブジェクト
 // APIがある場合は指定
@@ -67,7 +68,11 @@ export const putMail = values => async dispatch => {
   dispatch({ type: UPDATE_MAIL, values });
 }
 
-export const sortByDate = () => async dispatch => {
+export const sortByAsc = () => async dispatch => {
   const response = await (await fetch("data/allMails.json")).json()
-  dispatch({ type: SORT_BY_DATE, response });
+  dispatch({ type: SORT_BY_ASC, response });
+}
+export const sortByDesc = () => async dispatch => {
+  const response = await (await fetch("data/allMails.json")).json()
+  dispatch({ type: SORT_BY_DESC, response });
 }
