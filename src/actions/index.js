@@ -8,24 +8,15 @@ export const DELETE_MAIL = "DELETE_MAIL"
 export const UPDATE_MAIL = "UPDATE_MAIL"
 
 // Action・・・typeというkeyをもつオブジェクト
-export const increment = () => ({
-  type: "INCREMENT",
-})
-
-export const decrement = () => ({
-  type: "DECREMENT",
-})
-
 // APIがある場合は指定
 const ROOT_URL = "https://udemy-utils.herokuapp.com/api/v1"
 const QUERYSTRING = "?token=token123"
-// const test = "https://udemy-utils.herokuapp.com/api/v1/events?token=token123";
 export const readMails = () => async dispatch => {
-    const response = await (
-      await fetch(`${ROOT_URL}/events${QUERYSTRING}`)
-    ).json()
-    // const response = await ( await fetch('data/allMails.json')).json()
-    // console.log(response)
+    // const response = await (
+    //   await fetch(`${ROOT_URL}/events${QUERYSTRING}`)
+    // ).json()
+    const response = await ( await fetch('data/allMails.json')).json()
+    // console.log(response);
     dispatch({ type: READ_MAILS, response })
 }
 
@@ -60,7 +51,8 @@ export const createMails = values => async dispatch => {
 }
 
 export const getMail = id => async dispatch => {
-  const response = await axios.get(`${ROOT_URL}/events/${id}${QUERYSTRING}`);
+  // const response = await axios.get(`${ROOT_URL}/events/${id}${QUERYSTRING}`);
+  const response = await (await fetch("data/allMails.json")).json();
   dispatch({ type: GET_MAIL, response });
 }
 

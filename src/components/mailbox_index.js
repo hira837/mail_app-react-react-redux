@@ -12,8 +12,11 @@ import {
 } from 'material-ui/Table'
 import FloatingActionButton from 'material-ui/FloatingActionButton'
 import ContentAdd from 'material-ui/svg-icons/content/add'
+import { createMuiTheme } from "@material-ui/core/styles";
+import { ThemeProvider } from "@material-ui/styles";
+import { purple } from "@material-ui/core/colors";
 
-import { increment, decrement, readMails } from '../actions'
+import { readMails } from '../actions'
 
 class MailboxIndex extends Component {
   componentDidMount() {
@@ -23,37 +26,45 @@ class MailboxIndex extends Component {
   renderEvents() {
     return _.map(this.props.mails, (mail) => (
       <TableRow key={mail.id}>
-        <TableRowColumn>{mail.id}</TableRowColumn>
+        <TableRowColumn>{mail.from}</TableRowColumn>
+        <TableRowColumn>{mail.to}</TableRowColumn>
         <TableRowColumn>
           <Link to={`/mailbox/${mail.id}`}>
-          {mail.title}
+          {mail.subject}
           </Link>
         </TableRowColumn>
-        <TableRowColumn>{mail.body}</TableRowColumn>
+        <TableRowColumn>{mail.date}</TableRowColumn>
       </TableRow>
     ))
+  }
+
+  returnMailsLength() {
+    return _.size(this.props.mails)
   }
   
   render() {
     const style = {
       position: 'fixed',
       right: 12,
-      bottom: 12
+      bottom: 12,
+      maincolor: purple
     }
     return (
       <React.Fragment>
+        <div style={{ fontWeight: 700 }}>Results: {this.returnMailsLength()} mails</div>
         <FloatingActionButton
           containerElement={<Link to="/mailbox/create"></Link>}
-          style = {style}
+          style={style}
         >
           <ContentAdd />
         </FloatingActionButton>
         <Table>
           <TableHeader displaySelectAll={false} adjustForCheckbox={false}>
             <TableRow>
-              <TableHeaderColumn>ID</TableHeaderColumn>
-              <TableHeaderColumn>Title</TableHeaderColumn>
-              <TableHeaderColumn>Body</TableHeaderColumn>
+              <TableHeaderColumn>From</TableHeaderColumn>
+              <TableHeaderColumn>To</TableHeaderColumn>
+              <TableHeaderColumn>Subject</TableHeaderColumn>
+              <TableHeaderColumn>Date</TableHeaderColumn>
             </TableRow>
           </TableHeader>
           <TableBody displayRowCheckbox={false}>
@@ -68,8 +79,6 @@ class MailboxIndex extends Component {
 // const mapStateToProps = state => ({ value: state.count.value })
 const mapStateToProps = state => ({ mails: state.mails })
 const mapDispatchToProps = dispatch => ({
-  increment: () => dispatch(increment()),
-  decrement: () => dispatch(decrement()),
   readMails: () => dispatch(readMails())
 })
 // const mapDispatchToProps = ({ increment, decrement, readMailss })
