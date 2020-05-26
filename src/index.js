@@ -21,20 +21,18 @@ const enhancer =
 const store = createStore(reducer, enhancer)
 
 ReactDOM.render(
-  <React.StrictMode>
-    <MuiThemeProvider>
-      <Provider store={store}>
-        <BrowserRouter>
-          <Switch>
-            <Route path="/mailbox/create" component={MailboxCreate} />
-            <Route path="/mailbox/:id" component={MailboxShow} />
-            <Route exact path="/" component={MailboxIndex} />
-            <Route exact path="/mailbox" component={MailboxIndex} />
-          </Switch>
-        </BrowserRouter>
-      </Provider>
-    </MuiThemeProvider>
-  </React.StrictMode>,
+  <MuiThemeProvider>
+    <Provider store={store}>
+      <BrowserRouter>
+        <Switch>
+          <Route path="/mailbox/create" component={MailboxCreate} />
+          <Route path="/mailbox/:id" component={MailboxShow} />
+          <Route exact path="/" component={MailboxIndex} />
+          <Route exact path="/mailbox" component={MailboxIndex} />
+        </Switch>
+      </BrowserRouter>
+    </Provider>
+  </MuiThemeProvider>,
   document.getElementById("root")
 );
 

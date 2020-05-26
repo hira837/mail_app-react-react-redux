@@ -15,8 +15,9 @@ import ContentAdd from 'material-ui/svg-icons/content/add'
 import { createMuiTheme } from "@material-ui/core/styles";
 import { ThemeProvider } from "@material-ui/styles";
 import { purple } from "@material-ui/core/colors";
+import Button from '@material-ui/core/Button'
 
-import { readMails } from '../actions'
+import { readMails, sortByDate } from '../actions'
 
 class MailboxIndex extends Component {
   componentDidMount() {
@@ -41,6 +42,10 @@ class MailboxIndex extends Component {
   returnMailsLength() {
     return _.size(this.props.mails)
   }
+
+  async orderByDate() {
+    await this.props.sortByDate()
+  }
   
   render() {
     const style = {
@@ -52,6 +57,8 @@ class MailboxIndex extends Component {
     return (
       <React.Fragment>
         <div style={{ fontWeight: 700 }}>Results: {this.returnMailsLength()} mails</div>
+        <Button onClick={this.props.sortByDate}>日付並び替え</Button>
+        {/* <Button>日付並び替え</Button> */}
         <FloatingActionButton
           containerElement={<Link to="/mailbox/create"></Link>}
           style={style}
@@ -78,9 +85,9 @@ class MailboxIndex extends Component {
 
 // const mapStateToProps = state => ({ value: state.count.value })
 const mapStateToProps = state => ({ mails: state.mails })
-const mapDispatchToProps = dispatch => ({
-  readMails: () => dispatch(readMails())
-})
-// const mapDispatchToProps = ({ increment, decrement, readMailss })
+// const mapDispatchToProps = dispatch => ({
+//   readMails: () => dispatch(readMails())
+// })
+const mapDispatchToProps = ({ readMails, sortByDate })
 
 export default connect(mapStateToProps, mapDispatchToProps)(MailboxIndex)

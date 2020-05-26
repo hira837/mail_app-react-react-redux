@@ -6,6 +6,7 @@ export const CREATE_MAIL = "CREATE_MAIL"
 export const GET_MAIL = "GET_MAIL"
 export const DELETE_MAIL = "DELETE_MAIL"
 export const UPDATE_MAIL = "UPDATE_MAIL"
+export const SORT_BY_DATE = "SORT_BY_DATE"
 
 // Action・・・typeというkeyをもつオブジェクト
 // APIがある場合は指定
@@ -65,6 +66,8 @@ export const putMail = values => async dispatch => {
   await axios.put(`${ROOT_URL}/events/${values.id}${QUERYSTRING}`, values);
   dispatch({ type: UPDATE_MAIL, values });
 }
-// コンポーネントで使うのでexportしておく
-// 再利用するので(REDUCERで使う)ので変数に格納し、exportしておく
-// view側でインポート。あるイベントに対し、これらのアクションを実行して、適切な状態遷移を実行するための仕組み
+
+export const sortByDate = () => async dispatch => {
+  const response = await (await fetch("data/allMails.json")).json()
+  dispatch({ type: SORT_BY_DATE, response });
+}
