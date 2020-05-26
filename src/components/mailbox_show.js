@@ -9,7 +9,6 @@ import { getMail, deleteMail, putMail } from '../actions'
 
 class mailboxShow extends Component {
   constructor(props) {
-    console.log('mailboxShow')
     super(props)
     this.onSubmit = this.onSubmit.bind(this)
     this.onDeleteClick = this.onDeleteClick.bind(this)

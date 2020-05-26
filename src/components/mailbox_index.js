@@ -20,6 +20,10 @@ import Button from '@material-ui/core/Button'
 import { readMails, sortByDate } from '../actions'
 
 class MailboxIndex extends Component {
+  constructor(props) {
+    super(props)
+    this.orderByDate = this.orderByDate.bind(this)
+  }
   componentDidMount() {
     this.props.readMails()
   }
@@ -57,7 +61,7 @@ class MailboxIndex extends Component {
     return (
       <React.Fragment>
         <div style={{ fontWeight: 700 }}>Results: {this.returnMailsLength()} mails</div>
-        <Button onClick={this.props.sortByDate}>日付並び替え</Button>
+        <Button onClick={this.orderByDate}>日付並び替え</Button>
         {/* <Button>日付並び替え</Button> */}
         <FloatingActionButton
           containerElement={<Link to="/mailbox/create"></Link>}
