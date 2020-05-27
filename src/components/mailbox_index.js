@@ -36,6 +36,7 @@ class MailboxIndex extends Component {
       key: 'selection'
     };
     this.handleSelect = this.handleSelect.bind(this);
+    this.setDate = this.setDate.bind(this);
   }
   componentDidMount() {
     this.props.readMails();
@@ -73,6 +74,10 @@ class MailboxIndex extends Component {
     console.log(ranges);
   }
 
+  setDate() {
+    console.log(this.state.startDate, this.state.endDate)
+  }
+
   render() {
     const style = {
       position: "fixed",
@@ -92,11 +97,7 @@ class MailboxIndex extends Component {
     }));
     const ascButton = <ArrowDropUpIcon onClick={this.orderByDate} />,
       descButton = <ArrowDropDownIcon onClick={this.orderByDate} />;
-    // const selectionRange = {
-    //   startDate: new Date(),
-    //   endDate: new Date(),
-    //   key: 'selection',
-    // }
+
     function Calendar() {
       const [state, setState] = useState([
         {
@@ -109,7 +110,8 @@ class MailboxIndex extends Component {
         <div>
           <DateRangePicker
             onChange={item => 
-              setState([item.selection]
+              setState([item.selection],
+              console.log(item.selection)
             )}
             showSelectionPreview={true}
             moveRangeOnFirstSelection={false}
@@ -118,15 +120,15 @@ class MailboxIndex extends Component {
             direction="vertical"
             scroll={{ enabled: true }}
           />
-          <div>startDate: {state.startDate}</div>
-          <div>endDate: {state.endDate}</div>
-          <Button variant="contained" color="primary" onClick={console.log(state[0].startDate)}>Set Date</Button>
+          {/* <Button variant="contained" color="primary" onClick={console.log(state[0].startDate)}>Set Date</Button> */}
         </div>
       )
     }
+    
     return (
       <React.Fragment>
         <Calendar />
+        <Button variant="contained" color="secondary" onClick={this.setDate}>Set Date</Button>
         <div style={{ fontWeight: 700 }}>
           Results: {this.returnMailsLength()} mails
         </div>
