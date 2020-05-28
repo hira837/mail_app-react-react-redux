@@ -114,29 +114,35 @@ class MailboxIndex extends Component {
           <DateRangePicker
             onChange={item => 
               setState([item.selection],
-              console.log(item.selection)
             )}
             showSelectionPreview={true}
             moveRangeOnFirstSelection={false}
-            months={1}
+            months={2}
             ranges={state}
-            direction="vertical"
+            direction="horizontal"
             scroll={{ enabled: true }}
           />
-          {/* <Button variant="contained" color="primary" onClick={console.log(state[0].startDate)}>Set Date</Button> */}
         </div>
       )
     }
 
-    const calendarElement = <div>
-                              <Calendar />
-                              <Button variant="contained" color="secondary" onClick={this.setDate}>Set Date</Button>
-                            </div>
+    const calendarElement = 
+      <div style={{ position: "absolute", zIndex: 2 }}>
+        <Calendar />
+        <Button variant="contained" color="secondary" onClick={this.setDate}>Set Date</Button>
+      </div>
+    const modalOverlay = 
+      <div className="bg" style={{ position: "fixed", zIndex: 1, top: 0, left: 0, width: "100%", height: "120%", backgroundColor: "rgba(0,0,0,0.75)"}}>bg</div>
     
     return (
       <React.Fragment>
-        <Button onClick={this.calendarOpenClick}>Open Clendar</Button>
-        {this.state.calendarIsOpen ? calendarElement : null}
+        <Button variant="contained" color="primary" onClick={this.calendarOpenClick} style={{ zIndex: 2 }}>
+          {this.state.calendarIsOpen ? 'Close' : 'Open Clendar'}
+        </Button>
+        <div style={{ position: "relative" }}>
+          {this.state.calendarIsOpen ? calendarElement : null}
+        </div>
+        {this.state.calendarIsOpen ? modalOverlay : null}
         <div style={{ fontWeight: 700 }}>
           Results: {this.returnMailsLength()} mails
         </div>
