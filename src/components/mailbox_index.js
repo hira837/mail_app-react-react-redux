@@ -31,12 +31,13 @@ class MailboxIndex extends Component {
     this.orderByDate = this.orderByDate.bind(this);
     this.state = { 
       sorted: true,
+      calendarIsOpen: false,
       startDate: new Date(),
       endDate: addDays(new Date(), 7),
       key: 'selection'
     };
-    this.handleSelect = this.handleSelect.bind(this);
     this.setDate = this.setDate.bind(this);
+    this.calendarOpenClick = this.calendarOpenClick.bind(this)
   }
   componentDidMount() {
     this.props.readMails();
@@ -70,12 +71,14 @@ class MailboxIndex extends Component {
     }
   }
 
-  handleSelect(ranges) {
-    console.log(ranges);
-  }
-
   setDate() {
     console.log(this.state.startDate, this.state.endDate)
+  }
+
+  calendarOpenClick() {
+    this.setState((prevState) => ({
+      calendarIsOpen: !prevState.calendarIsOpen
+    }))
   }
 
   render() {
@@ -124,11 +127,16 @@ class MailboxIndex extends Component {
         </div>
       )
     }
+
+    const calendarElement = <div>
+                              <Calendar />
+                              <Button variant="contained" color="secondary" onClick={this.setDate}>Set Date</Button>
+                            </div>
     
     return (
       <React.Fragment>
-        <Calendar />
-        <Button variant="contained" color="secondary" onClick={this.setDate}>Set Date</Button>
+        <Button onClick={this.calendarOpenClick}>Open Clendar</Button>
+        {this.state.calendarIsOpen ? calendarElement : null}
         <div style={{ fontWeight: 700 }}>
           Results: {this.returnMailsLength()} mails
         </div>
