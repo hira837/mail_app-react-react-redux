@@ -20,24 +20,46 @@ import Button from '@material-ui/core/Button'
 // Date Picker
 import 'react-date-range/dist/styles.css'
 import 'react-date-range/dist/theme/default.css'
-import { DateRangePicker } from 'react-date-range'
+import { Calendar } from 'react-date-range'
 import { addDays } from 'date-fns'
 
 import { readMails, sortByAsc, sortByDesc } from '../actions'
+
+class CalendarInput extends Component {
+  constructor(props) {
+    super(props)
+    this.handleSelect = this.handleSelect.bind(this)
+  }
+  handleSelect(date) {
+    console.log(date)
+    this.props.onDateChange(date)
+  }
+
+  render() {
+    const startDate = this.props.startDate
+    return (
+      <Calendar
+        date={startDate}
+        onChange={this.handleSelect}
+      />
+    )
+  }
+}
 
 class MailboxIndex extends Component {
   constructor(props) {
     super(props);
     this.orderByDate = this.orderByDate.bind(this);
-    this.state = { 
+    // this.setDate = this.setDate.bind(this);
+    this.calendarOpenClick = this.calendarOpenClick.bind(this)
+    this.handleSetDate = this.handleSetDate.bind(this)
+    this.state = {
       sorted: true,
       calendarIsOpen: false,
-      startDate: new Date(),
-      endDate: addDays(new Date(), 7),
-      key: 'selection'
+      startDate: null,
+      // endDate: addDays(new Date(), 7),
+      // key: 'selection'
     };
-    this.setDate = this.setDate.bind(this);
-    this.calendarOpenClick = this.calendarOpenClick.bind(this)
   }
   componentDidMount() {
     this.props.readMails();
@@ -56,6 +78,16 @@ class MailboxIndex extends Component {
     ));
   }
 
+  handleSelect(ranges) {
+    console.log(ranges);
+    // {
+    //   selection: {
+    //     startDate: [native Date Object],
+    //     endDate: [native Date Object],
+    //   }
+    // }
+  }
+
   returnMailsLength() {
     return _.size(this.props.mails);
   }
@@ -71,8 +103,15 @@ class MailboxIndex extends Component {
     }
   }
 
-  setDate() {
-    console.log(this.state.startDate, this.state.endDate)
+  // setDate() {
+  //   this.setState((prevState) => ({
+  //     calendarIsOpen: !prevState.calendarIsOpen
+  //   }))
+  //   console.log(this.state.startDate, this.state.endDate)
+  // }
+
+  handleSetDate(date) {
+    this.setState({startDate: date})
   }
 
   calendarOpenClick() {
@@ -101,38 +140,53 @@ class MailboxIndex extends Component {
     const ascButton = <ArrowDropUpIcon onClick={this.orderByDate} />,
       descButton = <ArrowDropDownIcon onClick={this.orderByDate} />;
 
-    function Calendar() {
-      const [state, setState] = useState([
-        {
-          startDate: new Date(),
-          endDate: addDays(new Date(), 7),
-          key: 'selection'
-        }
-      ]);
-      return (
-        <div>
-          <DateRangePicker
-            onChange={item => 
-              setState([item.selection],
-            )}
-            showSelectionPreview={true}
-            moveRangeOnFirstSelection={false}
-            months={2}
-            ranges={state}
-            direction="horizontal"
-            scroll={{ enabled: true }}
-          />
-        </div>
-      )
-    }
+
+    // function Calendar() {
+    //   const [date, setDate] = useState([
+    //     {
+    //       startDate: new Date(),
+    //       endDate: new Date(),
+    //       key: 'selection'
+    //     }
+    //   ]);
+    //   const handleSelect = () => {
+    //     console.log(date[0].startDate);
+    //     // console.log(this.props.startDate);
+    //     // setDate({startDate: ranges.selection.startDate})
+    //     this.props.onDateChange(date[0].startDate)
+    //   }
+    //   return (
+    //     <div>
+    //       <DateRangePicker
+    //         onChange={async item => 
+    //           await setDate([item.selection],
+    //           // console.log(item.selection.startDate, item.selection.endDate),
+    //           handleSelect(item.selection)
+    //         )}
+    //         showSelectionPreview={true}
+    //         moveRangeOnFirstSelection={false}
+    //         months={1}
+    //         ranges={date}
+    //         direction="vertical"
+    //         scroll={{ enabled: true }}
+    //       />
+    //       <Button variant="contained" color="secondary" onClick={handleSelect}>Set Date</Button>
+    //     </div>
+    //   )
+    // }
+
+    const startDate = this.state.startDate
 
     const calendarElement = 
       <div style={{ position: "absolute", zIndex: 2 }}>
-        <Calendar />
-        <Button variant="contained" color="secondary" onClick={this.setDate}>Set Date</Button>
+        {/* <Calendar onDateChange={this.handleSetDate}/> */}
+        <CalendarInput 
+          startDate={startDate}
+          onDateChange={this.handleSetDate}
+        />
       </div>
     const modalOverlay = 
-      <div className="bg" style={{ position: "fixed", zIndex: 1, top: 0, left: 0, width: "100%", height: "120%", backgroundColor: "rgba(0,0,0,0.75)"}}>bg</div>
+      <div className="bg" style={{ position: "fixed", zIndex: 1, top: 0, left: 0, width: "100%", height: "120%", backgroundColor: "rgba(0,0,0,0.75)" }} onClick={this.calendarOpenClick}></div>
     
     return (
       <React.Fragment>
