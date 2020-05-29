@@ -6,6 +6,9 @@ import thunk from 'redux-thunk'
 import { BrowserRouter, Route, Switch } from 'react-router-dom'
 import { composeWithDevTools } from 'redux-devtools-extension'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
+// import CssBaseline from '@material-ui/core/CssBaseline'
+import Typography from '@material-ui/core/Typography'
+import Container from '@material-ui/core/Container'
 
 import './index.css';
 import reducer from './reducers'
@@ -21,18 +24,20 @@ const enhancer =
 const store = createStore(reducer, enhancer)
 
 ReactDOM.render(
-  <MuiThemeProvider>
-    <Provider store={store}>
-      <BrowserRouter>
-        <Switch>
-          <Route path="/mailbox/create" component={MailboxCreate} />
-          <Route path="/mailbox/:id" component={MailboxShow} />
-          <Route exact path="/" component={MailboxIndex} />
-          <Route exact path="/mailbox" component={MailboxIndex} />
-        </Switch>
-      </BrowserRouter>
-    </Provider>
-  </MuiThemeProvider>,
+    <Container width="75%">
+      <MuiThemeProvider>
+        <Provider store={store}>
+          <BrowserRouter>
+            <Switch>
+              <Route path="/mailbox/create" component={MailboxCreate} />
+              <Route path="/mailbox/:id" component={MailboxShow} />
+              <Route exact path="/" component={MailboxIndex} />
+              <Route exact path="/mailbox" component={MailboxIndex} />
+            </Switch>
+          </BrowserRouter>
+        </Provider>
+      </MuiThemeProvider>
+    </Container>,
   document.getElementById("root")
 );
 
