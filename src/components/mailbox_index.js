@@ -62,7 +62,7 @@ class MailboxIndex extends Component {
     this.state = {
       sorted: true,
       calendarIsOpen: false,
-      startDate: new Date(),
+      startDate: '',
       // endDate: addDays(new Date(), 7),
       // key: 'selection'
     };
@@ -100,7 +100,7 @@ class MailboxIndex extends Component {
   }
 
   async handleSetDate(date) {
-    await this.setState({startDate: date})
+    await this.setState({startDate: toShapeDate(date)})
     console.log(this.state.startDate)
   }
 
