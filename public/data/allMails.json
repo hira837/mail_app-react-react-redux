@@ -4,7 +4,7 @@
     "from": "aaa@example.com",
     "to": "zzz.zzz@example.com",
     "subject": "[ HR-888 ] Notice of official announcement",
-    "date": "20200524",
+    "date": "2020-05-24",
     "time:": "00:20",
     "attachedfile": false,
     "unread": 0
@@ -14,7 +14,7 @@
     "from": "bbb.bbbb@example.com",
     "to": "zzz.zzz@example.com",
     "subject": "[ HR-888 ] Notice of official announcement",
-    "date": "20200523",
+    "date": "2020-05-23",
     "time:": "00:20",
     "attachedfile": false,
     "unread": 0
@@ -24,7 +24,7 @@
     "from": "ccc@example.com",
     "to": "zzz.zzz@example.com",
     "subject": "[ HR-888 ] Notice of official announcement",
-    "date": "20200522",
+    "date": "2020-05-22",
     "time:": "00:20",
     "attachedfile": true,
     "unread": 1
@@ -34,7 +34,7 @@
     "from": "ddd.dddd@example.com",
     "to": "zzz.zzz@example.com",
     "subject": "[ HR-888 ] Notice of official announcement",
-    "date": "20200521",
+    "date": "2020-05-21",
     "time:": "00:20",
     "attachedfile": false,
     "unread": 1
@@ -44,7 +44,7 @@
     "from": "eee@example.com",
     "to": "zzz.zzz@example.com",
     "subject": "[ HR-888 ] Notice of official announcement",
-    "date": "20200520",
+    "date": "2020-05-20",
     "time:": "00:20",
     "attachedfile": false,
     "unread": 2

@@ -6,8 +6,6 @@ import thunk from 'redux-thunk'
 import { BrowserRouter, Route, Switch } from 'react-router-dom'
 import { composeWithDevTools } from 'redux-devtools-extension'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
-// import CssBaseline from '@material-ui/core/CssBaseline'
-import Typography from '@material-ui/core/Typography'
 import Container from '@material-ui/core/Container'
 
 import './index.css';

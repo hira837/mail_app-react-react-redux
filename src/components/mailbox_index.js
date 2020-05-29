@@ -16,7 +16,6 @@ import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown'
 import ArrowDropUpIcon from '@material-ui/icons/ArrowDropUp'
 import { makeStyles } from '@material-ui/core/styles'
 import Button from '@material-ui/core/Button'
-import { green } from '@material-ui/core/colors';
 
 // Date Picker
 import 'react-date-range/dist/styles.css'
@@ -25,11 +24,18 @@ import { Calendar } from 'react-date-range'
 
 import { readMails, sortByAsc, sortByDesc } from '../actions'
 
-function toShapeDate(date) {
-  const YYYY = date.getFullYear(),
-    MM = date.getMonth() + 1,
-    DD = date.getDate();
-  return YYYY + '/' + MM + '/' + DD
+function toLocaleString(date) {
+  return [
+    date.getFullYear(),
+    date.getMonth() + 1,
+    date.getDate()
+  ].join('-')
+}
+
+function filterByDate(date1, date2) {
+  const jsonDate = new Date(date1),
+  inputDate = new Date(date2)
+  return inputDate > jsonDate
 }
 
 class CalendarInput extends Component {
@@ -62,7 +68,7 @@ class MailboxIndex extends Component {
     this.state = {
       sorted: true,
       calendarIsOpen: false,
-      startDate: '',
+      startDate: new Date(),
       // endDate: addDays(new Date(), 7),
       // key: 'selection'
     };
@@ -100,8 +106,9 @@ class MailboxIndex extends Component {
   }
 
   async handleSetDate(date) {
-    await this.setState({startDate: toShapeDate(date)})
-    console.log(this.state.startDate)
+    await this.setState({startDate: toLocaleString(date)})
+    console.log(`string型: ${this.state.startDate}`)
+    console.log(`date型: ${filterByDate('2020-05-24', date)}`)
   }
 
   doneSetDate() {
