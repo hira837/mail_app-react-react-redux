@@ -32,10 +32,11 @@ function toLocaleString(date) {
   ].join('-')
 }
 
-function filterByDate(date1, date2) {
+function filterByDate(date1, date2, date3) {
   const jsonDate = new Date(date1),
-  inputDate = new Date(date2)
-  return inputDate > jsonDate
+  startDate = new Date(date2),
+  endDate = new Date(date3)
+  return startDate < jsonDate && jsonDate < endDate
 }
 
 class CalendarInput extends Component {
@@ -108,7 +109,7 @@ class MailboxIndex extends Component {
   async handleSetDate(date) {
     await this.setState({startDate: toLocaleString(date)})
     console.log(`string型: ${this.state.startDate}`)
-    console.log(`date型: ${filterByDate('2020-05-24', date)}`)
+    console.log(`date型: ${filterByDate('2020-05-24', date, '2020-07-01')}`)
   }
 
   doneSetDate() {
