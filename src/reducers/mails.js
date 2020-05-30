@@ -24,6 +24,7 @@ export default (mails = {}, action) => {
       // return _.mapKeys(action.response, "id")
       function filterByJson(item) {
         console.log(item.date, action.startDate)
+        console.log(typeof item.date, typeof action.startDate)
         if(item.date === action.startDate) {
           console.log("true")
           return true

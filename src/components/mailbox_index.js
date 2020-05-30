@@ -24,10 +24,18 @@ import { Calendar } from 'react-date-range'
 
 import { readMails, sortByAsc, sortByDesc, filterByDate } from '../actions'
 
+function toDoubleDigits(num) {
+  num += '';
+  if (num.length === 1) {
+    num = '0' + num
+  }
+  return num;
+}
+
 function toLocaleString(date) {
   return [
     date.getFullYear(),
-    date.getMonth() + 1,
+    toDoubleDigits(date.getMonth() + 1),
     date.getDate()
   ].join('-')
 }
@@ -130,11 +138,6 @@ class MailboxIndex extends Component {
   }
 
   render() {
-    const style = {
-      position: "fixed",
-      right: 12,
-      bottom: 12,
-    };
     const useStyles = makeStyles({
       root: {
         display: "flex",
