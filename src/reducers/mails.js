@@ -10,10 +10,8 @@ export default (mails = {}, action) => {
       return allMails;
     case GET_MAIL:
       const data = action.response.data;
-      console.log(data);
       return { ...mails, [data.id]: data };
     case DELETE_MAIL:
-      console.log(action.id, "delete reducer");
       delete mails[action.id];
       return { ...mails };
     case SORT_BY_ASC:
@@ -21,8 +19,17 @@ export default (mails = {}, action) => {
     case SORT_BY_DESC:
       return _.orderBy(action.response, "date", "desc");
     case FILTER_BY_DATE:
+      // console.log(action.startDate)
+      // console.log(action.response)
+      // return _.mapKeys(action.response, "id")
       function filterByJson(item) {
-        if(item.date === '2020-05-21') return true
+        console.log(item.date, action.startDate)
+        if(item.date === action.startDate) {
+          console.log("true")
+          return true
+        } else {
+          return console.log("false")
+        }
       }
       const filteredData = action.response.filter(filterByJson)
       console.log(filteredData)

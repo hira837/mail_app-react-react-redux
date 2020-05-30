@@ -78,7 +78,7 @@ export const sortByDesc = () => async dispatch => {
   dispatch({ type: SORT_BY_DESC, response });
 }
 
-export const filterByDate = () => async dispatch => {
+export const filterByDate = (startDate) => async dispatch => {
   const response = await (await fetch("data/allMails.json")).json()
-  dispatch({ type: FILTER_BY_DATE, response });
+  dispatch({ type: FILTER_BY_DATE, startDate, response });
 }

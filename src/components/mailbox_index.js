@@ -119,7 +119,7 @@ class MailboxIndex extends Component {
   }
 
   doneSetDate() {
-    this.props.filterByDate()
+    this.props.filterByDate(this.state.startDate)
     this.calendarOpenClick()
   }
 
@@ -210,10 +210,16 @@ class MailboxIndex extends Component {
 }
 
 // const mapStateToProps = state => ({ value: state.count.value })
-const mapStateToProps = state => ({ mails: state.mails })
-// const mapDispatchToProps = dispatch => ({
-//   readMails: () => dispatch(readMails())
-// })
-const mapDispatchToProps = ({ readMails, sortByAsc, sortByDesc, filterByDate })
+const mapStateToProps = state => ({ 
+  mails: state.mails,
+  startDate: state.startDate
+})
+const mapDispatchToProps = (dispatch) => ({
+  readMails: () => dispatch(readMails()),
+  sortByAsc: () => dispatch(sortByAsc()),
+  sortByDesc: () => dispatch(sortByDesc()),
+  filterByDate: (props) => dispatch(filterByDate(props)),
+})
+// const mapDispatchToProps = ({ readMails, sortByAsc, sortByDesc, filterByDate(startDate) })
 
 export default connect(mapStateToProps, mapDispatchToProps)(MailboxIndex)
