@@ -1,5 +1,5 @@
 import _ from 'lodash'
-import { READ_MAILS, DELETE_MAIL, GET_MAIL, UPDATE_MAIL, CREATE_MAIL, SORT_BY_ASC, SORT_BY_DESC} from '../actions';
+import { READ_MAILS, DELETE_MAIL, GET_MAIL, UPDATE_MAIL, CREATE_MAIL, SORT_BY_ASC, SORT_BY_DESC, FILTER_BY_DATE} from '../actions';
 
 export default (mails = {}, action) => {
   switch (action.type) {
@@ -7,7 +7,6 @@ export default (mails = {}, action) => {
     case UPDATE_MAIL:
     case CREATE_MAIL:
       const allMails = _.mapKeys(action.response, "id");
-      // console.log(allMails)
       return allMails;
     case GET_MAIL:
       const data = action.response.data;
@@ -21,6 +20,13 @@ export default (mails = {}, action) => {
       return _.orderBy(action.response, 'date', 'asc')
     case SORT_BY_DESC:
       return _.orderBy(action.response, "date", "desc");
+    case FILTER_BY_DATE:
+      function filterByJson(item) {
+        if(item.date === '2020-05-21') return true
+      }
+      const filteredData = action.response.filter(filterByJson)
+      console.log(filteredData)
+      return filteredData
     default:
       return mails;
   }

@@ -22,7 +22,7 @@ import 'react-date-range/dist/styles.css'
 import 'react-date-range/dist/theme/default.css'
 import { Calendar } from 'react-date-range'
 
-import { readMails, sortByAsc, sortByDesc } from '../actions'
+import { readMails, sortByAsc, sortByDesc, filterByDate } from '../actions'
 
 function toLocaleString(date) {
   return [
@@ -32,12 +32,18 @@ function toLocaleString(date) {
   ].join('-')
 }
 
-function filterByDate(date1, date2, date3) {
-  const jsonDate = new Date(date1),
-  startDate = new Date(date2),
-  endDate = new Date(date3)
-  return startDate < jsonDate && jsonDate < endDate
-}
+// function filterByDate(date1, date2, date3) {
+//   const jsonDate = new Date(date1),
+//   startDate = new Date(date2),
+//   endDate = new Date(date3)
+//   return startDate < jsonDate && jsonDate < endDate
+// }
+
+// function filterByJson(item) {
+//   if (item.date === '2020-05-21') {
+//     return true
+//   }
+// }
 
 class CalendarInput extends Component {
   constructor(props) {
@@ -108,11 +114,12 @@ class MailboxIndex extends Component {
 
   async handleSetDate(date) {
     await this.setState({startDate: toLocaleString(date)})
-    console.log(`string型: ${this.state.startDate}`)
-    console.log(`date型: ${filterByDate('2020-05-24', date, '2020-07-01')}`)
+    // console.log(`string型: ${this.state.startDate}`)
+    // console.log(`date型: ${filterByDate('2020-05-24', date, '2020-07-01')}`)
   }
 
   doneSetDate() {
+    this.props.filterByDate()
     this.calendarOpenClick()
   }
 
@@ -207,6 +214,6 @@ const mapStateToProps = state => ({ mails: state.mails })
 // const mapDispatchToProps = dispatch => ({
 //   readMails: () => dispatch(readMails())
 // })
-const mapDispatchToProps = ({ readMails, sortByAsc, sortByDesc })
+const mapDispatchToProps = ({ readMails, sortByAsc, sortByDesc, filterByDate })
 
 export default connect(mapStateToProps, mapDispatchToProps)(MailboxIndex)
