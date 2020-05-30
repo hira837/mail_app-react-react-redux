@@ -14,8 +14,10 @@ import FloatingActionButton from 'material-ui/FloatingActionButton'
 import ContentAdd from 'material-ui/svg-icons/content/add'
 import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown'
 import ArrowDropUpIcon from '@material-ui/icons/ArrowDropUp'
-import { makeStyles } from '@material-ui/core/styles'
+import { makeStyles, withStyles } from '@material-ui/core/styles'
 import Button from '@material-ui/core/Button'
+import grey from '@material-ui/core/colors/grey'
+import lightBlue from '@material-ui/core/colors/lightBlue'
 
 // Date Picker
 import 'react-date-range/dist/styles.css'
@@ -23,6 +25,21 @@ import 'react-date-range/dist/theme/default.css'
 import { Calendar } from 'react-date-range'
 
 import { readMails, sortByAsc, sortByDesc, filterByDate } from '../actions'
+
+const styles = theme => ({
+  root: {
+    background: 'linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%)',
+    border: 0,
+    borderRadius: 3,
+    boxShadow: '0 3px 5px 2px rgba(255, 105, 135, .3)',
+    color: grey[600],
+    height: 48,
+    padding: '0 30px'
+  },
+  tableHead: {
+    backgroundColor: grey[600]
+  }
+});
 
 function toDoubleDigits(num) {
   num += '';
@@ -45,12 +62,6 @@ function toLocaleString(date) {
 //   startDate = new Date(date2),
 //   endDate = new Date(date3)
 //   return startDate < jsonDate && jsonDate < endDate
-// }
-
-// function filterByJson(item) {
-//   if (item.date === '2020-05-21') {
-//     return true
-//   }
 // }
 
 class CalendarInput extends Component {
@@ -138,6 +149,7 @@ class MailboxIndex extends Component {
   }
 
   render() {
+    const { classes } = this.props;
     const useStyles = makeStyles({
       root: {
         display: "flex",
@@ -151,6 +163,11 @@ class MailboxIndex extends Component {
         bottom: 12,
       }
     });
+    const bgGrey = grey[300]; 
+    const mainStyles = {
+      color: lightBlue[500],
+    }
+
     const ascButton = <ArrowDropUpIcon onClick={this.orderByDate} />,
       descButton = <ArrowDropDownIcon onClick={this.orderByDate} />;
 
@@ -170,43 +187,45 @@ class MailboxIndex extends Component {
     
     return (
       <React.Fragment>
-        <div style={{ position: "relative" }}>
-          {this.state.calendarIsOpen ? calendarElement : null}
-        </div>
-        {this.state.calendarIsOpen ? modalOverlay : null}
-        
-        <fieldset onClick={this.calendarOpenClick}>
-          <legend>startDate</legend>
-          <input value={startDate} onChange={this.handleSetDate}/>
-        </fieldset>
+        <div className={classes.root}>
+          <div style={{ position: "relative" }}>
+            {this.state.calendarIsOpen ? calendarElement : null}
+          </div>
+          {this.state.calendarIsOpen ? modalOverlay : null}
+          
+          <fieldset onClick={this.calendarOpenClick}>
+            <legend>startDate</legend>
+            <input value={startDate} onChange={this.handleSetDate}/>
+          </fieldset>
 
-        <div style={{ fontWeight: 700 }}>
-          Results: {this.returnMailsLength()} mails
-        </div>
-        
-        <FloatingActionButton
-          containerElement={<Link to="/mailbox/create"></Link>}
-          styles={useStyles.addButton}
-        >
-          <ContentAdd />
-        </FloatingActionButton>
+          <div style={{ fontWeight: 700 }}>
+            Results: {this.returnMailsLength()} mails
+          </div>
+          
+          <FloatingActionButton
+            containerElement={<Link to="/mailbox/create"></Link>}
+            styles={useStyles.addButton}
+          >
+            <ContentAdd />
+          </FloatingActionButton>
 
-        <Table>
-          <TableHeader displaySelectAll={false} adjustForCheckbox={false}>
-            <TableRow>
-              <TableHeaderColumn>From</TableHeaderColumn>
-              <TableHeaderColumn>To</TableHeaderColumn>
-              <TableHeaderColumn>Subject</TableHeaderColumn>
-              <TableHeaderColumn styles={useStyles.root}>
-                <div>Date</div>
-                {this.state.sorted ? ascButton : descButton}
-              </TableHeaderColumn>
-            </TableRow>
-          </TableHeader>
-          <TableBody displayRowCheckbox={false}>
-            {this.renderEvents()}
-          </TableBody>
-        </Table>
+          <Table style={mainStyles}>
+            <TableHeader displaySelectAll={false} adjustForCheckbox={false}>
+              <TableRow style={{ backgroundColor: bgGrey}} className={classes.tableHead}>
+                <TableHeaderColumn>From</TableHeaderColumn>
+                <TableHeaderColumn>To</TableHeaderColumn>
+                <TableHeaderColumn>Subject</TableHeaderColumn>
+                <TableHeaderColumn styles={useStyles.root}>
+                  <div>Date</div>
+                  {this.state.sorted ? ascButton : descButton}
+                </TableHeaderColumn>
+              </TableRow>
+            </TableHeader>
+            <TableBody displayRowCheckbox={false}>
+              {this.renderEvents()}
+            </TableBody>
+          </Table>
+        </div>
       </React.Fragment>
     );
   }
@@ -225,4 +244,4 @@ const mapDispatchToProps = (dispatch) => ({
 })
 // const mapDispatchToProps = ({ readMails, sortByAsc, sortByDesc, filterByDate(startDate) })
 
-export default connect(mapStateToProps, mapDispatchToProps)(MailboxIndex)
+export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(MailboxIndex))
