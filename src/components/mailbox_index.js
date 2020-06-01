@@ -16,6 +16,7 @@ import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown'
 import ArrowDropUpIcon from '@material-ui/icons/ArrowDropUp'
 import { makeStyles, withStyles } from '@material-ui/core/styles'
 import Button from '@material-ui/core/Button'
+import brown from '@material-ui/core/colors/brown'
 import grey from '@material-ui/core/colors/grey'
 import lightBlue from '@material-ui/core/colors/lightBlue'
 
@@ -27,17 +28,28 @@ import { Calendar } from 'react-date-range'
 import { readMails, sortByAsc, sortByDesc, filterByDate } from '../actions'
 
 const styles = theme => ({
-  root: {
-    background: 'linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%)',
-    border: 0,
-    borderRadius: 3,
-    boxShadow: '0 3px 5px 2px rgba(255, 105, 135, .3)',
-    color: grey[600],
-    height: 48,
-    padding: '0 30px'
-  },
   tableHead: {
-    backgroundColor: grey[600]
+    backgroundColor: brown[50],
+    fontWeight: 700,
+    display: "flex",
+    alignItems: "center",
+    flexDirection: "row",
+    height: "50px",
+    color: grey[700],
+    borderTop: "1px solid #ddd",
+    borderBottom: "1px solid #ddd"
+  },
+  tableItem: {
+    display: "flex",
+    justifyContent: "flex-start",
+    alignItems: "center",
+    width: "100%",
+    padding: "10px"
+  },
+  addButton: {
+    position: "fixed",
+    right: 12,
+    bottom: 12,
   }
 });
 
@@ -105,14 +117,22 @@ class MailboxIndex extends Component {
 
   renderEvents() {
     return _.map(this.props.mails, (mail) => (
-      <TableRow key={mail.id}>
-        <TableRowColumn>{mail.from}</TableRowColumn>
-        <TableRowColumn>{mail.to}</TableRowColumn>
-        <TableRowColumn>
-          <Link to={`/mailbox/${mail.id}`}>{mail.subject}</Link>
-        </TableRowColumn>
-        <TableRowColumn>{mail.date}</TableRowColumn>
-      </TableRow>
+      <div key={mail.id} style={{ display: "flex", justifyContent: "space-around", alignItems: "center", height: "50px", borderBottom: "1px solid #ddd" }}>
+        <div style={{
+          display: "flex", justifyContent: "flex-start", alignItems: "center", width: "20%",
+          padding: "10px"}}>{mail.from}</div>
+        <div style={{
+          display: "flex", justifyContent: "flex-start", alignItems: "center", width: "20%",
+          padding: "10px" }}>{mail.to}</div>
+        <div style={{
+          display: "flex", justifyContent: "flex-start", alignItems: "center", width: "50%",
+          padding: "10px" }}>
+          <Link to={`/mailbox/${mail.id}`} style={{ color: "#0288d1"}}>{mail.subject}</Link>
+        </div>
+        <div style={{
+          display: "flex", justifyContent: "flex-start", alignItems: "center", width: "10%",
+          padding: "10px" }}>{mail.date}</div>
+      </div>
     ));
   }
 
@@ -150,24 +170,6 @@ class MailboxIndex extends Component {
 
   render() {
     const { classes } = this.props;
-    const useStyles = makeStyles({
-      root: {
-        display: "flex",
-        justifyContent: "flex-start",
-        alignItems: "center",
-        flexDirection: "row"
-      },
-      addButton: {
-        position: "fixed",
-        right: 12,
-        bottom: 12,
-      }
-    });
-    const bgGrey = grey[300]; 
-    const mainStyles = {
-      color: lightBlue[500],
-    }
-
     const ascButton = <ArrowDropUpIcon onClick={this.orderByDate} />,
       descButton = <ArrowDropDownIcon onClick={this.orderByDate} />;
 
@@ -187,7 +189,7 @@ class MailboxIndex extends Component {
     
     return (
       <React.Fragment>
-        <div className={classes.root}>
+        <div>
           <div style={{ position: "relative" }}>
             {this.state.calendarIsOpen ? calendarElement : null}
           </div>
@@ -204,27 +206,26 @@ class MailboxIndex extends Component {
           
           <FloatingActionButton
             containerElement={<Link to="/mailbox/create"></Link>}
-            styles={useStyles.addButton}
+            className={classes.addButton}
           >
             <ContentAdd />
           </FloatingActionButton>
 
-          <Table style={mainStyles}>
-            <TableHeader displaySelectAll={false} adjustForCheckbox={false}>
-              <TableRow style={{ backgroundColor: bgGrey}} className={classes.tableHead}>
-                <TableHeaderColumn>From</TableHeaderColumn>
-                <TableHeaderColumn>To</TableHeaderColumn>
-                <TableHeaderColumn>Subject</TableHeaderColumn>
-                <TableHeaderColumn styles={useStyles.root}>
-                  <div>Date</div>
-                  {this.state.sorted ? ascButton : descButton}
-                </TableHeaderColumn>
-              </TableRow>
-            </TableHeader>
-            <TableBody displayRowCheckbox={false}>
-              {this.renderEvents()}
-            </TableBody>
-          </Table>
+          <div>
+            <div className={classes.tableHead}>
+              <div className={classes.tableItem} style={{width: "20%"}}>From</div>
+              <div className={classes.tableItem} style={{width: "20%"}}>To</div>
+              <div className={classes.tableItem} style={{width: "50%"}}>Subject</div>
+              <div className={classes.tableItem} style={{width: "10%"}}>
+                <div>Date</div>
+                <div>{this.state.sorted ? ascButton : descButton}</div>
+              </div>
+            </div>
+      
+            {this.renderEvents()}
+
+          </div>
+
         </div>
       </React.Fragment>
     );
