@@ -19,6 +19,8 @@ import Button from '@material-ui/core/Button'
 import brown from '@material-ui/core/colors/brown'
 import grey from '@material-ui/core/colors/grey'
 import lightBlue from '@material-ui/core/colors/lightBlue'
+import logo from '../img/logo.png'
+import clip from '../img/icon_clip.svg'
 
 // Date Picker
 import 'react-date-range/dist/styles.css'
@@ -43,7 +45,6 @@ const styles = theme => ({
     display: "flex",
     justifyContent: "flex-start",
     alignItems: "center",
-    width: "100%",
     padding: "10px"
   },
   addButton: {
@@ -119,16 +120,20 @@ class MailboxIndex extends Component {
     return _.map(this.props.mails, (mail) => (
       <div key={mail.id} style={{ display: "flex", justifyContent: "space-around", alignItems: "center", height: "50px", borderBottom: "1px solid #ddd" }}>
         <div style={{
-          display: "flex", justifyContent: "flex-start", alignItems: "center", width: "20%",
+          display: "flex", justifyContent: "flex-start", alignItems: "center", width: "18%",
           padding: "10px"}}>{mail.from}</div>
         <div style={{
-          display: "flex", justifyContent: "flex-start", alignItems: "center", width: "20%",
+          display: "flex", justifyContent: "flex-start", alignItems: "center", width: "18%",
           padding: "10px" }}>{mail.to}</div>
+        <div style={{width: "4%", padding: "10px"}}>
+          <div style={{ backgroundColor: "#616161", color: "#fff", borderRadius: "5px", textAlign: "center"}}>{mail.unread === 0 ? "" : `+${mail.unread}`}</div>
+        </div>
         <div style={{
-          display: "flex", justifyContent: "flex-start", alignItems: "center", width: "50%",
+          display: "flex", justifyContent: "flex-start", alignItems: "center", width: "45%",
           padding: "10px" }}>
           <Link to={`/mailbox/${mail.id}`} style={{ color: "#0288d1"}}>{mail.subject}</Link>
         </div>
+        <div style={{width: "5%"}}>{mail.attachedfile ? <img style={{width: "25px"}} src={clip} /> : ""}</div>
         <div style={{
           display: "flex", justifyContent: "flex-start", alignItems: "center", width: "10%",
           padding: "10px" }}>{mail.date}</div>
