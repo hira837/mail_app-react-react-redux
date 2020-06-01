@@ -75,6 +75,7 @@ class MailboxIndex extends Component {
       startDate: new Date(),
       // endDate: addDays(new Date(), 7),
       // key: 'selection'
+      breakPoint: 600
     };
   }
   componentDidMount() {
@@ -94,7 +95,7 @@ class MailboxIndex extends Component {
           <Link to={`/mailbox/${mail.id}`} style={{ color: "#0288d1"}}>{mail.subject}</Link>
         </div>
         <div className={classes.innerItemClip}>
-          {mail.attachedfile ? <img style={{width: "25px"}} src={clip} /> : ""}
+          {mail.attachedfile ? <img src={clip} /> : ""}
         </div>
         <div className={classes.tableInnerItem + " " + classes.innerItemDate}>{mail.date}</div>
       </div>
@@ -135,8 +136,8 @@ class MailboxIndex extends Component {
 
   render() {
     const { classes } = this.props;
-    const ascButton = <ArrowDropUpIcon onClick={this.orderByDate} />,
-      descButton = <ArrowDropDownIcon onClick={this.orderByDate} />;
+    const ascButton = <ArrowDropUpIcon fontSize="small" onClick={this.orderByDate} />,
+      descButton = <ArrowDropDownIcon fontSize="small"　onClick={this.orderByDate} />;
 
     const resultDate = this.state.startDate
     const startDate = resultDate
@@ -177,13 +178,13 @@ class MailboxIndex extends Component {
           </FloatingActionButton>
 
           <div>
-            <div className={classes.tableHead}>
-              <div className={classes.tableItem} style={{width: "20%"}}>From</div>
-              <div className={classes.tableItem} style={{width: "20%"}}>To</div>
-              <div className={classes.tableItem} style={{width: "50%"}}>Subject</div>
-              <div className={classes.tableItem} style={{width: "10%"}}>
+            <div className={classes.titleRow}>
+              <div className={classes.titleItem + " " + classes.titleFrom}>From</div>
+              <div className={classes.titleItem + " " + classes.titleTo}>To</div>
+              <div className={classes.titleItem + " " + classes.titleSubject}>Subject</div>
+              <div className={classes.titleItem + " " + classes.titleDate}>
                 <div>Date</div>
-                <div>{this.state.sorted ? ascButton : descButton}</div>
+                <div className={classes.titleItemIcon}>{this.state.sorted ? ascButton : descButton}</div>
               </div>
             </div>
       
