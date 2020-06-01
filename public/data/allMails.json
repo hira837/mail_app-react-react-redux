@@ -12,8 +12,8 @@
   {
     "id": 2,
     "from": "bbb.bbbb@example.com",
-    "to": "zzz.zzz@example.com",
-    "subject": "[ HR-888 ] Notice of official announcement",
+    "to": "yyy@example.com",
+    "subject": "[web:333] 'Web Contact'",
     "date": "2020-05-23",
     "time:": "00:20",
     "attachedfile": false,
@@ -22,8 +22,8 @@
   {
     "id": 3,
     "from": "ccc@example.com",
-    "to": "zzz.zzz@example.com",
-    "subject": "[ HR-888 ] Notice of official announcement",
+    "to": "xxx@example.com",
+    "subject": "Happy New Year! Greetings for the New Year.",
     "date": "2020-05-22",
     "time:": "00:20",
     "attachedfile": true,
@@ -32,8 +32,8 @@
   {
     "id": 4,
     "from": "ddd.dddd@example.com",
-    "to": "zzz.zzz@example.com",
-    "subject": "[ HR-888 ] Notice of official announcement",
+    "to": "vvv.vvv@example.com",
+    "subject": "[HR-887(Revised: Office Expansion Project Team)] Notice of off...",
     "date": "2020-05-21",
     "time:": "00:20",
     "attachedfile": false,
@@ -42,8 +42,8 @@
   {
     "id": 5,
     "from": "eee@example.com",
-    "to": "zzz.zzz@example.com",
-    "subject": "[ HR-888 ] Notice of official announcement",
+    "to": "sss@example.com",
+    "subject": "[Github] Logout page",
     "date": "2020-05-20",
     "time:": "00:20",
     "attachedfile": false,
