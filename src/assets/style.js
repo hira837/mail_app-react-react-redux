@@ -179,5 +179,12 @@ export const commonStyles = theme => ({
   },
   modalBg: {
     position: "fixed", zIndex: 1, top: 0, left: 0, width: "100%", height: "120%", backgroundColor: "rgba(0,0,0,0.75)"
+  },
+  logo: {
+    width: "100%",
+    height: "70vh",
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center"
   }
 });

@@ -192,7 +192,7 @@ class MailboxIndex extends Component {
               </div>
             </div>
       
-            {this.renderEvents()}
+            {this.returnMailsLength() > 0 ? this.renderEvents() : <div className={classes.logo}><img src={logo} /></div>}
 
           </div>
 
