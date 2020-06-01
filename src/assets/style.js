@@ -1,6 +1,7 @@
 import brown from '@material-ui/core/colors/brown'
 import grey from '@material-ui/core/colors/grey'
 import lightBlue from '@material-ui/core/colors/lightBlue'
+import iconMailSp from '../img/icon_mail_sp.svg'
 
 export const commonStyles = theme => ({
   tableHead: {
@@ -33,21 +34,6 @@ export const commonStyles = theme => ({
     },
     [theme.breakpoints.up('sm')]: {
       flexDirection: "row",
-      '& div:nth-child(2)': {
-        width: "18%",
-      },
-      '& div:nth-child(3)': {
-        width: "4%"
-      },
-      '& div:nth-child(4)': {
-        width: "45%"
-      },
-      '& div:nth-child(5)': {
-        width: "5%"
-      },
-      '& div:nth-child(6)': {
-        width: "10%"
-      },
     }
   },
   tableInnerItem: {
@@ -55,7 +41,41 @@ export const commonStyles = theme => ({
     justifyContent: "flex-start",
     alignItems: "center",
     padding: "10px",
-    overflow: "hidden"
+    overflow: "hidden",
+    width: "100%"
+  },
+  innerItemFrom: {
+    [theme.breakpoints.down('sm')]: {
+      width: "100%",
+    },
+    [theme.breakpoints.up('sm')]: {
+      width: "18%",
+    },
+  },
+  innerItemTo: {
+    [theme.breakpoints.up('sm')]: {
+      width: "18%",
+    },
+  },
+  innerItemUnread: {
+    [theme.breakpoints.up('sm')]: {
+      width: "4%",
+    }
+  },
+  innerItemSubject: {
+    [theme.breakpoints.up('sm')]: {
+      width: "45%",
+    },
+  },
+  innerItemClip: {
+    [theme.breakpoints.up('sm')]: {
+      width: "5%",
+    },
+  },
+  innerItemDate: {
+    [theme.breakpoints.up('sm')]: {
+      width: "10%",
+    },
   },
   unreadItem: {
     backgroundColor: grey[700], 

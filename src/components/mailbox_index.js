@@ -85,18 +85,18 @@ class MailboxIndex extends Component {
     const { classes } = this.props;
     return _.map(this.props.mails, (mail) => (
       <div key={mail.id} className={classes.tableInnerRow}>
-        <div className={classes.tableInnerItem} style={{width: "18%"}}>{mail.from}</div>
-        <div className={classes.tableInnerItem}>{mail.to}</div>
-        <div>
+        <div className={classes.tableInnerItem + " " + classes.innerItemFrom}>{mail.from}</div>
+        <div className={classes.tableInnerItem + " " + classes.innerItemTo}>{mail.to}</div>
+        <div className={classes.innerItemUnread}>
           {mail.unread === 0 ? "" : <div className={classes.unreadItem}>+{mail.unread}</div>}
         </div>
-        <div className={classes.tableInnerItem}>
+        <div className={classes.tableInnerItem + " " + classes.innerItemSubject}>
           <Link to={`/mailbox/${mail.id}`} style={{ color: "#0288d1"}}>{mail.subject}</Link>
         </div>
-        <div>
+        <div className={classes.innerItemClip}>
           {mail.attachedfile ? <img style={{width: "25px"}} src={clip} /> : ""}
         </div>
-        <div className={classes.tableInnerItem}>{mail.date}</div>
+        <div className={classes.tableInnerItem + " " + classes.innerItemDate}>{mail.date}</div>
       </div>
     ));
   }
