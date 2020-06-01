@@ -9,9 +9,6 @@ import ArrowDropUpIcon from '@material-ui/icons/ArrowDropUp'
 import { withStyles } from '@material-ui/core/styles'
 import { commonStyles } from '../assets/style'
 import Button from '@material-ui/core/Button'
-import brown from '@material-ui/core/colors/brown'
-import grey from '@material-ui/core/colors/grey'
-import lightBlue from '@material-ui/core/colors/lightBlue'
 import logo from '../img/logo.png'
 import clip from '../img/icon_clip.svg'
 
@@ -89,15 +86,17 @@ class MailboxIndex extends Component {
     return _.map(this.props.mails, (mail) => (
       <div key={mail.id} className={classes.tableInnerRow}>
         <div className={classes.tableInnerItem} style={{width: "18%"}}>{mail.from}</div>
-        <div className={classes.tableInnerItem} style={{width: "18%"}}>{mail.to}</div>
-        <div style={{width: "4%", padding: "10px"}}>
-          <div style={{ backgroundColor: "#616161", color: "#fff", borderRadius: "5px", textAlign: "center"}}>{mail.unread === 0 ? "" : `+${mail.unread}`}</div>
+        <div className={classes.tableInnerItem}>{mail.to}</div>
+        <div>
+          {mail.unread === 0 ? "" : <div className={classes.unreadItem}>+{mail.unread}</div>}
         </div>
-        <div className={classes.tableInnerItem} style={{width: "45%"}}>
+        <div className={classes.tableInnerItem}>
           <Link to={`/mailbox/${mail.id}`} style={{ color: "#0288d1"}}>{mail.subject}</Link>
         </div>
-        <div style={{width: "5%"}}>{mail.attachedfile ? <img style={{width: "25px"}} src={clip} /> : ""}</div>
-        <div className={classes.tableInnerItem} style={{width: "10%"}}>{mail.date}</div>
+        <div>
+          {mail.attachedfile ? <img style={{width: "25px"}} src={clip} /> : ""}
+        </div>
+        <div className={classes.tableInnerItem}>{mail.date}</div>
       </div>
     ));
   }
@@ -151,7 +150,7 @@ class MailboxIndex extends Component {
         <Button variant="contained" color="secondary" onClick={this.doneSetDate}>Done</Button>
       </div>
     const modalOverlay = 
-      <div className="bg" style={{ position: "fixed", zIndex: 1, top: 0, left: 0, width: "100%", height: "120%", backgroundColor: "rgba(0,0,0,0.75)" }} onClick={this.calendarOpenClick}></div>
+      <div className={classes.modalBg} onClick={this.calendarOpenClick}></div>
     
     return (
       <React.Fragment>
@@ -167,7 +166,7 @@ class MailboxIndex extends Component {
           </fieldset>
 
           <div style={{ fontWeight: 700 }}>
-            Results: {this.returnMailsLength()} mails
+            Results: {this.returnMailsLength() <= 1 ? this.returnMailsLength() + "mail" : this.returnMailsLength() + "mails" }
           </div>
           
           <FloatingActionButton

@@ -19,7 +19,6 @@ export const readMails = () => async dispatch => {
     //   await fetch(`${ROOT_URL}/events${QUERYSTRING}`)
     // ).json()
     const response = await ( await fetch('data/allMails.json')).json()
-    // console.log(response);
     dispatch({ type: READ_MAILS, response })
 }
 
@@ -31,7 +30,6 @@ export const createMails = values => async dispatch => {
   //   headers: {"Content-Type": "application/json; charset=utf-8"},
   //   body: JSON.stringify(values),
   // }).json();
-  console.log(response);
   dispatch({ type: CREATE_MAIL, response });
 
   // postData(`${ROOT_URL}/events${QUERYSTRING}`, values)
