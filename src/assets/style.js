@@ -4,6 +4,12 @@ import lightBlue from '@material-ui/core/colors/lightBlue'
 import iconMailSp from '../img/icon_mail_sp.svg'
 
 export const commonStyles = theme => ({
+  root: {
+    [theme.breakpoints.up('sm')]: {
+      width: "95%",
+      margin: "3vw auto"
+    }
+  },
   titleRow: {
     backgroundColor: grey[100],
     fontWeight: 700,
@@ -39,7 +45,8 @@ export const commonStyles = theme => ({
     [theme.breakpoints.down('sm')]: {
       marginLeft: "8px",
       paddingLeft: "8px",
-      borderLeft: "1px solid #000"
+      borderLeft: "1px solid #000",
+      whiteSpace: "no-wrap"
     },
     [theme.breakpoints.up('sm')]: {
       width: "20%"
@@ -52,7 +59,7 @@ export const commonStyles = theme => ({
       borderLeft: "1px solid #000"
     },
     [theme.breakpoints.up('sm')]: {
-      width: "50%"
+      width: "45%"
     }
   },
   titleDate: {
@@ -62,16 +69,14 @@ export const commonStyles = theme => ({
       borderLeft: "1px solid #000"
     },
     [theme.breakpoints.up('sm')]: {
-      width: "10%"
+      width: "15%",
+      paddingLeft: "35px"
     }
   },
   titleItemIcon: {
     display: "flex",
     justifyContent: "flex-start",
     alignItems: "center",
-    // "& svg" {
-    //   height: ".8rem"
-    // }
   },
   tableInnerRow: {
     display: "flex",
@@ -108,7 +113,7 @@ export const commonStyles = theme => ({
       marginBottom: "3px",
     },
     [theme.breakpoints.up('sm')]: {
-      width: "18%",
+      width: "20%",
     },
   },
   innerItemTo: {
@@ -116,13 +121,8 @@ export const commonStyles = theme => ({
       marginBottom: "5px"
     },
     [theme.breakpoints.up('sm')]: {
-      width: "18%",
+      width: "20%",
     },
-  },
-  innerItemUnread: {
-    [theme.breakpoints.up('sm')]: {
-      width: "4%",
-    }
   },
   innerItemSubject: {
     [theme.breakpoints.up('sm')]: {
@@ -131,23 +131,25 @@ export const commonStyles = theme => ({
   },
   innerItemClip: {
     [theme.breakpoints.up('sm')]: {
-      width: "5%",
+      position: "absolute",
+      left: "0",
       '& img': {
         width: "20px"
       }
     },
     [theme.breakpoints.down('sm')]: {
-      position: "absolute",
-      top: "10px",
-      right: "80px",
       '& img': {
         width: "15px"
       }
     }
   },
   innerItemDate: {
+    display: "flex",
+    justifyContent: "flex-start",
     [theme.breakpoints.up('sm')]: {
-      width: "10%",
+      width: "15%",
+      position: "relative",
+      paddingLeft: "35px"
     },
     [theme.breakpoints.down('sm')]: {
       position: "absolute",
@@ -156,9 +158,19 @@ export const commonStyles = theme => ({
       width: "auto"
     }
   },
+  toItem: {
+    width: "100%",
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: "space-between"
+  },
   unreadItem: {
-    backgroundColor: grey[700], 
-    color: "#fff", borderRadius: "5px", textAlign: "center"
+    backgroundColor: grey[500], 
+    color: "#fff", 
+    borderRadius: "5px", 
+    textAlign: "center",
+    width: "25px",
+    padding: "3px"
   },
   addButton: {
     position: "fixed",

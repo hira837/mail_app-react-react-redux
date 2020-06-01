@@ -87,17 +87,21 @@ class MailboxIndex extends Component {
     return _.map(this.props.mails, (mail) => (
       <div key={mail.id} className={classes.tableInnerRow}>
         <div className={classes.tableInnerItem + " " + classes.innerItemFrom}>{mail.from}</div>
-        <div className={classes.tableInnerItem + " " + classes.innerItemTo}>{mail.to}</div>
-        <div className={classes.innerItemUnread}>
-          {mail.unread === 0 ? "" : <div className={classes.unreadItem}>+{mail.unread}</div>}
+        <div className={classes.tableInnerItem + " " + classes.innerItemTo}>
+          {mail.to.length >= 2 
+          ? <div className={classes.toItem}>
+              <div>{mail.to[0] + ", ..."}</div>
+              <div className={classes.unreadItem}>+{mail.to.length}</div>
+            </div>
+          : mail.to}
         </div>
         <div className={classes.tableInnerItem + " " + classes.innerItemSubject}>
           <Link to={`/mailbox/${mail.id}`} style={{ color: "#0288d1"}}>{mail.subject}</Link>
         </div>
-        <div className={classes.innerItemClip}>
-          {mail.attachedfile ? <img src={clip} /> : ""}
+        <div className={classes.tableInnerItem + " " + classes.innerItemDate}>
+          {mail.attachedfile ? <div className={classes.innerItemClip}><img src={clip} /></div> : ""}
+          {mail.date}
         </div>
-        <div className={classes.tableInnerItem + " " + classes.innerItemDate}>{mail.date}</div>
       </div>
     ));
   }
@@ -155,7 +159,7 @@ class MailboxIndex extends Component {
     
     return (
       <React.Fragment>
-        <div>
+        <div className={classes.root}>
           <div style={{ position: "relative" }}>
             {this.state.calendarIsOpen ? calendarElement : null}
           </div>
