@@ -12,6 +12,7 @@
     "material-ui": "0.20.0",
     "react": "^16.13.1",
     "react-date-range": "arthot/react-date-range#next-fns-1",
+    "react-date-range-calendar": "^0.1.14",
     "react-dom": "^16.13.1",
     "react-redux": "^7.2.0",
     "react-router-dom": "^5.2.0",

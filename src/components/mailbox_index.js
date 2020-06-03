@@ -15,7 +15,9 @@ import clip from '../img/icon_clip.svg'
 // Date Picker
 import 'react-date-range/dist/styles.css'
 import 'react-date-range/dist/theme/default.css'
-import { Calendar } from 'react-date-range'
+// import { Calendar } from 'react-date-range'
+// import { DateRange } from 'react-date-range'
+import Calendar from "react-date-range-calendar";
 
 import { readMails, sortByAsc, sortByDesc, filterByDate } from '../actions'
 
@@ -47,18 +49,32 @@ class CalendarInput extends Component {
     super(props)
     this.handleSelect = this.handleSelect.bind(this)
   }
-  handleSelect(date) {
-    this.props.onDateChange(date)
+  handleSelect(startDate, endDate, validDateRange) {
+    this.props.onDateChange(startDate, endDate, validDateRange)
   }
 
   render() {
-    const startDate = this.props.startDate
+    const startDate = this.props.startDate,
+    endDate = this.props.endDate
+    // state = [this.props]
     return (
+      // <Calendar
+      //   date={startDate}
+      //   onChange={this.handleSelect}
+      // />
+      // <DateRange
+      //   editableDateInputs={true}
+      //   onChange={(item) => {
+      //     this.setState([item.selection])
+      //   }}
+      //   moveRangeOnFirstSelection={false}
+      //   ranges={this.state}
+      // />
       <Calendar
-        date={startDate}
-        onChange={this.handleSelect}
+        // onSelect={(selectedDate) => {console.log('selected date',selectedDate)}}
+        onSelect={(startDate, endDate, validDateRange) => this.handleSelect(startDate, endDate, validDateRange)}
       />
-    )
+    );
   }
 }
 
@@ -73,8 +89,9 @@ class MailboxIndex extends Component {
       sorted: true,
       calendarIsOpen: false,
       startDate: new Date(),
-      // endDate: addDays(new Date(), 7),
-      // key: 'selection'
+      endDate: new Date(),
+      validDateRange: [],
+      key: 'selection',
       breakPoint: 600
     };
   }
@@ -121,14 +138,16 @@ class MailboxIndex extends Component {
     }
   }
 
-  async handleSetDate(date) {
-    await this.setState({startDate: toLocaleString(date)})
-    // console.log(`string型: ${this.state.startDate}`)
-    // console.log(`date型: ${filterByDate('2020-05-24', date, '2020-07-01')}`)
+  async handleSetDate(startDate, endDate, validDateRange) {
+    await this.setState({
+      startDate: startDate,
+      endDate: endDate,
+      validDateRange: validDateRange
+    })
   }
 
   doneSetDate() {
-    this.props.filterByDate(this.state.startDate)
+    this.props.filterByDate(this.state.startDate, this.state.endDate, this.state.validDateRange)
     this.calendarOpenClick()
   }
 
@@ -143,13 +162,16 @@ class MailboxIndex extends Component {
     const ascButton = <ArrowDropUpIcon fontSize="small" onClick={this.orderByDate} />,
       descButton = <ArrowDropDownIcon fontSize="small"　onClick={this.orderByDate} />;
 
-    const resultDate = this.state.startDate
-    const startDate = resultDate
+    const startDate = this.state.startDate,
+    endDate = this.state.endDate
 
     const calendarElement = 
       <div style={{ position: "absolute", zIndex: 2 }}>
-        <CalendarInput 
+        {/* <CalendarInput 
           startDate={startDate}
+          onDateChange={this.handleSetDate}
+        /> */}
+        <CalendarInput 
           onDateChange={this.handleSetDate}
         />
         <Button variant="contained" color="secondary" onClick={this.doneSetDate}>Done</Button>
@@ -166,9 +188,10 @@ class MailboxIndex extends Component {
           {this.state.calendarIsOpen ? modalOverlay : null}
           
           <fieldset onClick={this.calendarOpenClick}>
-            <legend>startDate</legend>
-            <input value={startDate} onChange={this.handleSetDate}/>
+            <legend>startDate/endDate</legend>
+            <input value={startDate, endDate} onChange={this.handleSetDate}/>
           </fieldset>
+          
 
           <div style={{ fontWeight: 700 }}>
             Results: {this.returnMailsLength() <= 1 ? this.returnMailsLength() + "mail" : this.returnMailsLength() + "mails" }
@@ -211,7 +234,7 @@ const mapDispatchToProps = (dispatch) => ({
   readMails: () => dispatch(readMails()),
   sortByAsc: () => dispatch(sortByAsc()),
   sortByDesc: () => dispatch(sortByDesc()),
-  filterByDate: (props) => dispatch(filterByDate(props)),
+  filterByDate: (startDate, endDate, validDateRange) => dispatch(filterByDate(startDate, endDate, validDateRange)),
 })
 // const mapDispatchToProps = ({ readMails, sortByAsc, sortByDesc, filterByDate(startDate) })
 

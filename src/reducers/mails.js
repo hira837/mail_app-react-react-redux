@@ -19,22 +19,38 @@ export default (mails = {}, action) => {
     case SORT_BY_DESC:
       return _.orderBy(action.response, "date", "desc");
     case FILTER_BY_DATE:
-      // console.log(action.startDate)
-      // console.log(action.response)
+      // console.log(action.validDateRange)
       // return _.mapKeys(action.response, "id")
       function filterByJson(item) {
-        console.log(item.date, action.startDate)
-        console.log(typeof item.date, typeof action.startDate)
-        if(item.date === action.startDate) {
-          console.log("true")
-          return true
-        } else {
-          return console.log("false")
-        }
+        return _.forEach(action.validDateRange, (inputCalendatDate) => {
+          if (item.date === inputCalendatDate) {
+            console.log(`${item.date}(json) = ${inputCalendatDate}(input)`)
+            console.log("true");
+            return true;
+          } else {
+            console.log(`${item.date}(json) != ${inputCalendatDate}(input)`);
+            console.log("false")
+            // return false
+          }
+        })
       }
+      function filterItems(arr, query) {
+        return arr.filter((el) => {
+          if(el === query) {
+            console.log("true")
+            return true
+          } else {
+            console.log("false")
+            // return false
+          }
+        })
+      }
+      // const filteredData = filterItems(action.validDateRange, "2020-06-01");
       const filteredData = action.response.filter(filterByJson)
+      // const filterItems = action.response.filterItems(action.response, action.validDateRange)
       console.log(filteredData)
-      return filteredData
+      // return filteredData
+      return _.mapKeys(action.response, "id");
     default:
       return mails;
   }
