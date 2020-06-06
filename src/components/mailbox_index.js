@@ -9,14 +9,18 @@ import ArrowDropUpIcon from '@material-ui/icons/ArrowDropUp'
 import { withStyles } from '@material-ui/core/styles'
 import { commonStyles } from '../assets/style'
 import Button from '@material-ui/core/Button'
+import Input from '@material-ui/core/Input'
+import InputAdornment from '@material-ui/core/InputAdornment'
+import InputLabel from '@material-ui/core/InputLabel'
+import FormControl from '@material-ui/core/FormControl'
 import logo from '../img/logo.png'
 import clip from '../img/icon_clip.svg'
+import calendar from '../img/icon_calender.svg'
+import search from '../img/icon_search.svg'
 
 // Date Picker
 import 'react-date-range/dist/styles.css'
 import 'react-date-range/dist/theme/default.css'
-// import { Calendar } from 'react-date-range'
-// import { DateRange } from 'react-date-range'
 import Calendar from "react-date-range-calendar";
 
 import { readMails, sortByAsc, sortByDesc, filterByDate } from '../actions'
@@ -88,8 +92,8 @@ class MailboxIndex extends Component {
     this.state = {
       sorted: true,
       calendarIsOpen: false,
-      startDate: new Date(),
-      endDate: new Date(),
+      startDate: '',
+      endDate: '',
       validDateRange: [],
       key: 'selection',
       breakPoint: 600
@@ -167,10 +171,6 @@ class MailboxIndex extends Component {
 
     const calendarElement = 
       <div style={{ position: "absolute", zIndex: 2 }}>
-        {/* <CalendarInput 
-          startDate={startDate}
-          onDateChange={this.handleSetDate}
-        /> */}
         <CalendarInput 
           onDateChange={this.handleSetDate}
         />
@@ -187,13 +187,43 @@ class MailboxIndex extends Component {
           </div>
           {this.state.calendarIsOpen ? modalOverlay : null}
           
-          <fieldset onClick={this.calendarOpenClick}>
-            <legend>startDate/endDate</legend>
-            <input value={startDate, endDate} onChange={this.handleSetDate}/>
-          </fieldset>
+         
+            {/* <input value={startDate} onChange={this.handleSetDate}/>
+            <input value={endDate} onChange={this.handleSetDate}/> */}
+            {/* <span>{startDate}</span>
+            <span>{endDate}</span> */}
+          {/* <FormControl className={classes.calendarInput} onClick={this.calendarOpenClick}>
+            <InputLabel htmlFor="start-date">Start Date</InputLabel>
+            <Input id="start-date" value={startDate}
+              startAdornment={
+                <InputAdornment position="start">
+                  <img src={calendar} className={classes.calendarIcon}/>
+                </InputAdornment>
+              }/>
+          </FormControl>
+          <FormControl className={classes.calendarInput} onClick={this.calendarOpenClick}>
+            <InputLabel htmlFor="end-date">End Date</InputLabel>
+            <Input id="end-date" value={endDate} variant="outlined"startAdornment={
+              <InputAdornment position="end">
+                <img src={search} className={classes.searchIcon} />
+              </InputAdornment>
+            }/>
+          </FormControl> */}
+
+          <div style={{display: "flex"}}>
+            <div className={classes.calendarInput} onClick={this.calendarOpenClick}>
+              <div><img src={calendar} className={classes.calendarIcon} /></div>
+              <div className={classes.calendarItem}>{startDate}</div>
+              <div>-</div>
+              <div className={classes.calendarItem}>{endDate}</div>
+            </div>
+            <div className={classes.searchIcon}>
+              <img src={search} style={{width: "25px", heigt: "25px"}} />
+            </div>
+          </div>
           
 
-          <div style={{ fontWeight: 700 }}>
+          <div style={{ fontWeight: 700, marginBottom: "5px" }}>
             Results: {this.returnMailsLength() <= 1 ? this.returnMailsLength() + "mail" : this.returnMailsLength() + "mails" }
           </div>
           
@@ -228,7 +258,9 @@ class MailboxIndex extends Component {
 // const mapStateToProps = state => ({ value: state.count.value })
 const mapStateToProps = state => ({ 
   mails: state.mails,
-  startDate: state.startDate
+  startDate: state.startDate,
+  endDate: state.endDate,
+  validDateRange: state.validDateRange
 })
 const mapDispatchToProps = (dispatch) => ({
   readMails: () => dispatch(readMails()),

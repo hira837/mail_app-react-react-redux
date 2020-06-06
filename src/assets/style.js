@@ -186,5 +186,38 @@ export const commonStyles = theme => ({
     display: "flex",
     justifyContent: "center",
     alignItems: "center"
+  },
+  calendarInput: {
+    height: "50px", 
+    width: "300px", 
+    cursor: "pointer",
+    marginBottom: "15px",
+    border: "2px solid #f5f5f5",
+    borderRadius: "5px",
+    display: "flex",
+    justifyContent: "flex-start",
+    alignItems: "center",
+    flexDirection: "row",
+    padding: "10px"
+  },
+  calendarItem: {
+    width: "100px",
+    margin: "0 10px"
+  },
+  calendarIcon: {
+    width: "25px",
+    height: "25px"
+  },
+  searchIcon: {
+    height: "50px",
+    width: "50px", 
+    backgroundColor: "#f5f5f5",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    borderRadius: "5px"
+  },
+  endDate: {
+
   }
 });
