@@ -9,10 +9,6 @@ import ArrowDropUpIcon from '@material-ui/icons/ArrowDropUp'
 import { withStyles } from '@material-ui/core/styles'
 import { commonStyles } from '../assets/style'
 import Button from '@material-ui/core/Button'
-import Input from '@material-ui/core/Input'
-import InputAdornment from '@material-ui/core/InputAdornment'
-import InputLabel from '@material-ui/core/InputLabel'
-import FormControl from '@material-ui/core/FormControl'
 import logo from '../img/logo.png'
 import clip from '../img/icon_clip.svg'
 import calendar from '../img/icon_calender.svg'
@@ -24,22 +20,6 @@ import 'react-date-range/dist/theme/default.css'
 import Calendar from "react-date-range-calendar";
 
 import { readMails, sortByAsc, sortByDesc, filterByDate } from '../actions'
-
-function toDoubleDigits(num) {
-  num += '';
-  if (num.length === 1) {
-    num = '0' + num
-  }
-  return num;
-}
-
-function toLocaleString(date) {
-  return [
-    date.getFullYear(),
-    toDoubleDigits(date.getMonth() + 1),
-    date.getDate()
-  ].join('-')
-}
 
 function replaceToSlash(date) {
   const regrex = /-/gi

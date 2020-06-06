@@ -4,6 +4,10 @@ import { Field, reduxForm } from 'redux-form'
 import { Link } from 'react-router-dom'
 import RaisedButton from 'material-ui/RaisedButton'
 import TextField from 'material-ui/TextField'
+import Button from "@material-ui/core/Button";
+import { withStyles } from "@material-ui/core/styles";
+import DeleteIcon from "@material-ui/icons/Delete"
+// import TextField from "@material-ui/core/TextField";
 
 import { getMail, deleteMail, putMail } from '../actions'
 
@@ -19,11 +23,12 @@ class mailboxShow extends Component {
     if (id) this.props.getMail(id)
   }
 
-  renderField(field) {
+  renderTitle(field) {
     const { input, label, type, meta: { touched, error } } = field
 
     return (
       <TextField
+        fullWidth
         hintText={label}
         floatingLabelText={label}
         type={type}
@@ -31,6 +36,35 @@ class mailboxShow extends Component {
         {...input}
         fullWidth={true}
       />
+      // <TextField
+      //   id="standard-multiline-flexible"
+      //   label="Multiline"
+      //   multiline
+      //   rowsMax={4}
+      // />
+    );
+  }
+  renderBody(field) {
+    const { input, label, type, meta: { touched, error } } = field
+
+    return (
+      <TextField
+        fullWidth
+        hintText={label}
+        floatingLabelText={label}
+        type={type}
+        errorText={touched && error}
+        {...input}
+        fullWidth={true}
+      />
+      // <TextField
+      //   id="outlined-multiline-static"
+      //   label="Multiline"
+      //   multiline
+      //   rows={4}
+      //   defaultValue="Default"
+      //   variant="outlined"
+      // />
     );
   }
 
@@ -51,13 +85,20 @@ class mailboxShow extends Component {
 
     return (
       <form onSubmit={handleSubmit(this.onSubmit)}>
-        <div><Field label="Title" name="title" tyle="text" component={this.renderField} /></div>
-        <div><Field label="Body" name="body" tyle="text" component={this.renderField} /></div>
+        <div><Field label="Title" name="title" tyle="text" component={this.renderTitle} /></div>
+        <div><Field label="Body" name="body" tyle="text" component={this.renderBody} /></div>
         
         <div>
-          <RaisedButton label="Submit" style={style} type="submit" disabled={pristine || submitting || invalid}/>
+          {/* <RaisedButton label="Submit" style={style} type="submit" disabled={pristine || submitting || invalid}/> */}
           <RaisedButton label="Cancel" style={style} containerElement={<Link to="/" />} />
-          <RaisedButton label="Delete" onClick={this.onDeleteClick} />
+          <Button
+            variant="contained"
+            color="secondary"
+            startIcon={<DeleteIcon />}
+            onClick={this.onDeleteClick}
+          >
+            Delete
+          </Button>
         </div>
       </form>
     )
