@@ -41,12 +41,10 @@ function toLocaleString(date) {
   ].join('-')
 }
 
-// function filterByDate(date1, date2, date3) {
-//   const jsonDate = new Date(date1),
-//   startDate = new Date(date2),
-//   endDate = new Date(date3)
-//   return startDate < jsonDate && jsonDate < endDate
-// }
+function replaceToSlash(date) {
+  const regrex = /-/gi
+  return date.replace(regrex, '/')
+}
 
 class CalendarInput extends Component {
   constructor(props) {
@@ -58,24 +56,8 @@ class CalendarInput extends Component {
   }
 
   render() {
-    const startDate = this.props.startDate,
-    endDate = this.props.endDate
-    // state = [this.props]
     return (
-      // <Calendar
-      //   date={startDate}
-      //   onChange={this.handleSelect}
-      // />
-      // <DateRange
-      //   editableDateInputs={true}
-      //   onChange={(item) => {
-      //     this.setState([item.selection])
-      //   }}
-      //   moveRangeOnFirstSelection={false}
-      //   ranges={this.state}
-      // />
       <Calendar
-        // onSelect={(selectedDate) => {console.log('selected date',selectedDate)}}
         onSelect={(startDate, endDate, validDateRange) => this.handleSelect(startDate, endDate, validDateRange)}
       />
     );
@@ -186,36 +168,13 @@ class MailboxIndex extends Component {
             {this.state.calendarIsOpen ? calendarElement : null}
           </div>
           {this.state.calendarIsOpen ? modalOverlay : null}
-          
-         
-            {/* <input value={startDate} onChange={this.handleSetDate}/>
-            <input value={endDate} onChange={this.handleSetDate}/> */}
-            {/* <span>{startDate}</span>
-            <span>{endDate}</span> */}
-          {/* <FormControl className={classes.calendarInput} onClick={this.calendarOpenClick}>
-            <InputLabel htmlFor="start-date">Start Date</InputLabel>
-            <Input id="start-date" value={startDate}
-              startAdornment={
-                <InputAdornment position="start">
-                  <img src={calendar} className={classes.calendarIcon}/>
-                </InputAdornment>
-              }/>
-          </FormControl>
-          <FormControl className={classes.calendarInput} onClick={this.calendarOpenClick}>
-            <InputLabel htmlFor="end-date">End Date</InputLabel>
-            <Input id="end-date" value={endDate} variant="outlined"startAdornment={
-              <InputAdornment position="end">
-                <img src={search} className={classes.searchIcon} />
-              </InputAdornment>
-            }/>
-          </FormControl> */}
 
           <div style={{display: "flex"}}>
             <div className={classes.calendarInput} onClick={this.calendarOpenClick}>
               <div><img src={calendar} className={classes.calendarIcon} /></div>
-              <div className={classes.calendarItem}>{startDate}</div>
+              <div className={classes.calendarItem}>{replaceToSlash(startDate)}</div>
               <div>-</div>
-              <div className={classes.calendarItem}>{endDate}</div>
+              <div className={classes.calendarItem}>{replaceToSlash(endDate)}</div>
             </div>
             <div className={classes.searchIcon}>
               <img src={search} style={{width: "25px", heigt: "25px"}} />
