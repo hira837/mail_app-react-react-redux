@@ -14,7 +14,6 @@ import clip from '../img/icon_clip.svg'
 import calendar from '../img/icon_calender.svg'
 import search from '../img/icon_search.svg'
 import iconMailSp from '../img/icon_mail_sp.svg'
-import arrowRight from '../img/icon_arrow02.svg'
 
 // Date Picker
 import Calendar from "react-date-range-calendar";

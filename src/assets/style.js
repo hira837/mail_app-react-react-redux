@@ -274,3 +274,7 @@ export const commonStyles = theme => ({
     height: "auto"
   }
 });
+
+export const mailStyles = theme => ({
+  
+})

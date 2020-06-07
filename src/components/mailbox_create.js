@@ -3,9 +3,9 @@ import { connect } from 'react-redux'
 import { Field, reduxForm } from 'redux-form'
 import { Link } from 'react-router-dom'
 import RaisedButton from 'material-ui/RaisedButton'
-import TextField from 'material-ui/TextField'
 import SaveIcon from '@material-ui/icons/Save'
 import Button from '@material-ui/core/Button'
+import TextField from "@material-ui/core/TextField";
 
 import { createMails } from '../actions'
 
@@ -29,6 +29,43 @@ class mailboxCreate extends Component {
     )
   }
 
+  renderTitle(field) {
+    const { input, label, type, meta: { touched, error } } = field
+
+    return (
+      <TextField
+        fullWidth
+        hintText={label}
+        floatingLabelText={label}
+        type={type}
+        errorText={touched && error}
+        {...input}
+        label="Subject"
+        multiline
+        rowsMax="4"
+        style={{ marginBottom: "15px" }}
+      />
+    );
+  }
+  renderBody(field) {
+    const { input, label, type, meta: { touched, error } } = field
+
+    return (
+      <TextField
+        fullWidth
+        hintText={label}
+        floatingLabelText={label}
+        type={type}
+        errorText={touched && error}
+        {...input}
+        multiline
+        variant="outlined"
+        label="Body"
+        rows="4"
+      />
+    );
+  }
+
   async onSubmit(values) {
     await this.props.createMails(values);
     this.props.history.push("/");
@@ -39,9 +76,9 @@ class mailboxCreate extends Component {
     const style = { margin: 12 }
 
     return (
-      <form onSubmit={handleSubmit(this.onSubmit)}>
-        <div><Field label="Title" name="title" tyle="text" component={this.renderField} /></div>
-        <div><Field label="Body" name="body" tyle="text" component={this.renderField} /></div>
+      <form style={style} onSubmit={handleSubmit(this.onSubmit)}>
+        <div><Field label="Title" name="title" tyle="text" component={this.renderTitle} /></div>
+        <div><Field label="Body" name="body" tyle="text" component={this.renderBody} /></div>
         
         <div>
           <RaisedButton label="Send" style={style} type="submit" disabled={pristine || submitting || invalid} />

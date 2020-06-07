@@ -3,11 +3,9 @@ import { connect } from 'react-redux'
 import { Field, reduxForm } from 'redux-form'
 import { Link } from 'react-router-dom'
 import RaisedButton from 'material-ui/RaisedButton'
-import TextField from 'material-ui/TextField'
 import Button from "@material-ui/core/Button";
-import { withStyles } from "@material-ui/core/styles";
 import DeleteIcon from "@material-ui/icons/Delete"
-// import TextField from "@material-ui/core/TextField";
+import TextField from "@material-ui/core/TextField";
 
 import { getMail, deleteMail, putMail } from '../actions'
 
@@ -34,14 +32,11 @@ class mailboxShow extends Component {
         type={type}
         errorText={touched && error}
         {...input}
-        fullWidth={true}
+        label="Subject"
+        multiline
+        rowsMax="4"
+        style={{marginBottom: "15px"}}
       />
-      // <TextField
-      //   id="standard-multiline-flexible"
-      //   label="Multiline"
-      //   multiline
-      //   rowsMax={4}
-      // />
     );
   }
   renderBody(field) {
@@ -55,16 +50,11 @@ class mailboxShow extends Component {
         type={type}
         errorText={touched && error}
         {...input}
-        fullWidth={true}
+        multiline
+        variant="outlined"
+        label="Body"
+        rows="4"
       />
-      // <TextField
-      //   id="outlined-multiline-static"
-      //   label="Multiline"
-      //   multiline
-      //   rows={4}
-      //   defaultValue="Default"
-      //   variant="outlined"
-      // />
     );
   }
 
@@ -84,7 +74,7 @@ class mailboxShow extends Component {
     const style = { margin: 12 }
 
     return (
-      <form onSubmit={handleSubmit(this.onSubmit)}>
+      <form style={style} onSubmit={handleSubmit(this.onSubmit)}>
         <div>
           <Field 
             label="Subject" 
