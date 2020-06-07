@@ -4,6 +4,8 @@ import { Field, reduxForm } from 'redux-form'
 import { Link } from 'react-router-dom'
 import RaisedButton from 'material-ui/RaisedButton'
 import TextField from 'material-ui/TextField'
+import SaveIcon from '@material-ui/icons/Save'
+import Button from '@material-ui/core/Button'
 
 import { createMails } from '../actions'
 
@@ -42,8 +44,16 @@ class mailboxCreate extends Component {
         <div><Field label="Body" name="body" tyle="text" component={this.renderField} /></div>
         
         <div>
-          <RaisedButton label="Submit" style={style} type="submit" disabled={pristine || submitting || invalid} />
+          <RaisedButton label="Send" style={style} type="submit" disabled={pristine || submitting || invalid} />
           <RaisedButton label="Cancel" style={style} containerElement={<Link to="/" />} />
+          <Button
+            variant="contained"
+            color="primary"
+            size="small"
+            startIcon={<SaveIcon />}
+          >
+            Save
+          </Button>
         </div>
       </form>
     )

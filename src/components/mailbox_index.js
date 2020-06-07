@@ -13,11 +13,27 @@ import logo from '../img/logo.png'
 import clip from '../img/icon_clip.svg'
 import calendar from '../img/icon_calender.svg'
 import search from '../img/icon_search.svg'
+import iconMailSp from '../img/icon_mail_sp.svg'
+import arrowRight from '../img/icon_arrow02.svg'
 
 // Date Picker
 import Calendar from "react-date-range-calendar";
 
 import { readMails, sortByAsc, sortByDesc, filterByDate } from '../actions'
+
+function getWindowSize() {
+  var w = window,
+    d = document,
+    e = d.documentElement,
+    g = d.getElementsByTagName('body')[0],
+    w = w.innerWidth || e.clientWidth || g.clientWidth,
+    h = w.innerHeight || e.clientHeight || g.clientHeight;
+
+  return {
+    width: w,
+    height: h
+  }
+}
 
 function replaceToSlash(date) {
   const regrex = /-/gi
@@ -56,17 +72,26 @@ class MailboxIndex extends Component {
       endDate: '',
       validDateRange: [],
       key: 'selection',
-      breakPoint: 600
+      breakPoint: 600,
+      deviceIsSp: false
     };
   }
   componentDidMount() {
     this.props.readMails();
+    if(getWindowSize().width < this.state.breakPoint) {
+      this.state.deviceIsSp = true
+      console.log(this.state.deviceIsSp)
+    } else {
+      this.state.deviceIsSp = false
+    }
   }
 
   renderEvents() {
     const { classes } = this.props;
+    const spMail = <div className={classes.iconMailSp}><img className={classes.iconMailSpItem} src={iconMailSp} /></div>
     return _.map(this.props.mails, (mail) => (
       <div key={mail.id} className={classes.tableInnerRow}>
+        {this.state.deviceIsSp ? spMail : ''}
         <div className={classes.tableInnerItem + " " + classes.innerItemFrom}>{mail.from}</div>
         <div className={classes.tableInnerItem + " " + classes.innerItemTo}>
           {mail.to.length >= 2 
@@ -147,20 +172,20 @@ class MailboxIndex extends Component {
           </div>
           {this.state.calendarIsOpen ? modalOverlay : null}
 
-          <div style={{display: "flex"}}>
+          <div className={classes.calendarParent}>
             <div className={classes.calendarInput} onClick={this.calendarOpenClick}>
               <div><img src={calendar} className={classes.calendarIcon} /></div>
               <div className={classes.calendarItem}>{replaceToSlash(startDate)}</div>
               <div>-</div>
               <div className={classes.calendarItem}>{replaceToSlash(endDate)}</div>
             </div>
-            <div className={classes.searchIcon}>
-              <img src={search} style={{width: "25px", heigt: "25px"}} />
+            <div className={classes.searchItem}>
+              <img src={search} className={classes.searchIcon}/>
             </div>
           </div>
           
 
-          <div style={{ fontWeight: 700, marginBottom: "5px" }}>
+          <div className={classes.resultItem}>
             Results: {this.returnMailsLength() <= 1 ? this.returnMailsLength() + "mail" : this.returnMailsLength() + "mails" }
           </div>
           

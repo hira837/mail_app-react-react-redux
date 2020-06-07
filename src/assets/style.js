@@ -1,7 +1,5 @@
-import brown from '@material-ui/core/colors/brown'
 import grey from '@material-ui/core/colors/grey'
-import lightBlue from '@material-ui/core/colors/lightBlue'
-import iconMailSp from '../img/icon_mail_sp.svg'
+import arrowRight from '../img/icon_arrow02.svg'
 
 export const commonStyles = theme => ({
   root: {
@@ -111,6 +109,7 @@ export const commonStyles = theme => ({
     [theme.breakpoints.down('sm')]: {
       width: "100%",
       marginBottom: "3px",
+      paddingLeft: "20px",
     },
     [theme.breakpoints.up('sm')]: {
       width: "20%",
@@ -118,7 +117,8 @@ export const commonStyles = theme => ({
   },
   innerItemTo: {
     [theme.breakpoints.down('sm')]: {
-      marginBottom: "5px"
+      marginBottom: "5px",
+      paddingLeft: "20px",
     },
     [theme.breakpoints.up('sm')]: {
       width: "20%",
@@ -138,6 +138,7 @@ export const commonStyles = theme => ({
       }
     },
     [theme.breakpoints.down('sm')]: {
+      marginRight: "5px",
       '& img': {
         width: "15px"
       }
@@ -155,7 +156,12 @@ export const commonStyles = theme => ({
       position: "absolute",
       top: "10px",
       right: "10px",
-      width: "auto"
+      width: "auto",
+      paddingRight: "15px",
+      backgroundImage: `url(${arrowRight})`,
+      backgroundRepeat: "no-repeat",
+      backgroundPosition: "100% 50%",
+      backgroundSize: "5px"
     }
   },
   toItem: {
@@ -165,12 +171,19 @@ export const commonStyles = theme => ({
     justifyContent: "space-between"
   },
   unreadItem: {
-    backgroundColor: grey[500], 
+    backgroundColor: "#979797", 
     color: "#fff", 
     borderRadius: "5px", 
     textAlign: "center",
     width: "25px",
-    padding: "3px"
+    padding: "3px 5px",
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    [theme.breakpoints.down('sm')]: {
+      width: "35px",
+      height: "25px",
+    }
   },
   addButton: {
     position: "fixed",
@@ -187,6 +200,13 @@ export const commonStyles = theme => ({
     justifyContent: "center",
     alignItems: "center"
   },
+  calendarParent: {
+    display: "flex",
+    flexDirection: "row",
+    [theme.breakpoints.down('sm')]: {
+      margin: "10px",
+    }
+  },
   calendarInput: {
     height: "50px", 
     width: "300px", 
@@ -198,7 +218,11 @@ export const commonStyles = theme => ({
     justifyContent: "flex-start",
     alignItems: "center",
     flexDirection: "row",
-    padding: "10px"
+    padding: "10px",
+    [theme.breakpoints.down('sm')]: {
+      width: "55%",
+      height: "40px"
+    },
   },
   calendarItem: {
     width: "100px",
@@ -206,18 +230,47 @@ export const commonStyles = theme => ({
   },
   calendarIcon: {
     width: "25px",
-    height: "25px"
+    height: "25px",
+    [theme.breakpoints.down('sm')]: {
+      width: "20px",
+      height: "20px"
+    },
   },
-  searchIcon: {
+  searchItem: {
     height: "50px",
     width: "50px", 
     backgroundColor: "#f5f5f5",
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
-    borderRadius: "5px"
+    borderRadius: "5px",
+    [theme.breakpoints.down('sm')]: {
+      height: "40px"
+    },
   },
-  endDate: {
-
+  searchIcon: {
+    width: "25px", heigt: "25px",
+    [theme.breakpoints.down('sm')]: {
+      width: "20px",
+      height: "20px"
+    },
+  },
+  resultItem: {
+    fontWeight: "700",
+    marginBottom: "5px",
+    [theme.breakpoints.down('sm')]: {
+      margin: "10px 5px",
+    }
+  },
+  iconMailSp: {
+    [theme.breakpoints.down('sm')]: {
+      position: "absolute",
+      top: "15px",
+      left: "10px"
+    }
+  },
+  iconMailSpItem: {
+    width: "15px",
+    height: "auto"
   }
 });
