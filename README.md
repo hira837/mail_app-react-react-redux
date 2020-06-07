@@ -1,3 +1,7 @@
 # Mail Application Demo with React / React redux
 
-[Hennge Challeng](https://challenge.hennge.com/challenge-details/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOlsiZ2Z5eG04NjhAZ21haWwuY29tIl0sImlzcyI6Imhlbm5nZS1hZG1pc3Npb24tY2hhbGxlbmdlIiwic3ViIjoiY2hhbGxlbmdlIn0.m052jdmxyBJ_TIpTFOAiRBgE1WrSfwIvkY-QKNlw0oo)
+## how to install
+```yarn install```
+
+## how to start
+```yarn start```
