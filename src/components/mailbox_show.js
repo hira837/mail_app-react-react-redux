@@ -27,10 +27,7 @@ class mailboxShow extends Component {
     return (
       <TextField
         fullWidth
-        hintText={label}
-        floatingLabelText={label}
         type={type}
-        errorText={touched && error}
         {...input}
         label="Subject"
         multiline
@@ -45,10 +42,7 @@ class mailboxShow extends Component {
     return (
       <TextField
         fullWidth
-        hintText={label}
-        floatingLabelText={label}
         type={type}
-        errorText={touched && error}
         {...input}
         multiline
         variant="outlined"
