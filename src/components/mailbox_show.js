@@ -85,8 +85,22 @@ class mailboxShow extends Component {
 
     return (
       <form onSubmit={handleSubmit(this.onSubmit)}>
-        <div><Field label="Title" name="title" tyle="text" component={this.renderTitle} /></div>
-        <div><Field label="Body" name="body" tyle="text" component={this.renderBody} /></div>
+        <div>
+          <Field 
+            label="Subject" 
+            name="subject" 
+            type="text" 
+            component={this.renderTitle} 
+          />
+        </div>
+        <div>
+          <Field 
+            label="Body" 
+            name="body" 
+            type="text" 
+            component={this.renderBody} 
+            />
+        </div>
         
         <div>
           {/* <RaisedButton label="Submit" style={style} type="submit" disabled={pristine || submitting || invalid}/> */}

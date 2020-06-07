@@ -9,7 +9,7 @@ export default (mails = {}, action) => {
       const allMails = _.mapKeys(action.response, "id");
       return allMails;
     case GET_MAIL:
-      const data = action.response.data;
+      const data = action.response;
       return { ...mails, [data.id]: data };
     case DELETE_MAIL:
       delete mails[action.id];

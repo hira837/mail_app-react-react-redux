@@ -15,8 +15,6 @@ import calendar from '../img/icon_calender.svg'
 import search from '../img/icon_search.svg'
 
 // Date Picker
-import 'react-date-range/dist/styles.css'
-import 'react-date-range/dist/theme/default.css'
 import Calendar from "react-date-range-calendar";
 
 import { readMails, sortByAsc, sortByDesc, filterByDate } from '../actions'

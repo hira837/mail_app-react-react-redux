@@ -53,9 +53,9 @@ export const createMails = values => async dispatch => {
 
 export const getMail = id => async dispatch => {
   // const response = await axios.get(`${ROOT_URL}/events/${id}${QUERYSTRING}`);
-  let response = await (await fetch("data/allMails.json")).json();
-  response = response.find(item => item.id === {id})
-  console.log(response);
+  // let response = await (await fetch("../data/allMails.json")).json();
+  let response = await axios.get("../data/allMails.json")
+  response = response.data.find(item => item.id.toString() === id)
   dispatch({ type: GET_MAIL, response });
 }
 
