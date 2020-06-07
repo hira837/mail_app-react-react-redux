@@ -1,5 +1,5 @@
 import grey from '@material-ui/core/colors/grey'
-import arrowRight from '../img/icon_arrow02.svg'
+import arrowRight from '../assets/img/icon_arrow02.svg'
 
 export const commonStyles = theme => ({
   root: {

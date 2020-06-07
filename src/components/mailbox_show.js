@@ -22,7 +22,7 @@ class mailboxShow extends Component {
   }
 
   renderTitle(field) {
-    const { input, label, type, meta: { touched, error } } = field
+    const { input, type } = field
 
     return (
       <TextField
@@ -37,7 +37,7 @@ class mailboxShow extends Component {
     );
   }
   renderBody(field) {
-    const { input, label, type, meta: { touched, error } } = field
+    const { input, type } = field
 
     return (
       <TextField
