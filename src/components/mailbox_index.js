@@ -9,6 +9,9 @@ import ArrowDropUpIcon from '@material-ui/icons/ArrowDropUp'
 import { withStyles } from '@material-ui/core/styles'
 import { commonStyles } from '../assets/style'
 import Button from '@material-ui/core/Button'
+import Fab from '@material-ui/core/Fab'
+import CloseIcon from '@material-ui/icons/Close';
+import NavigationIcon from '@material-ui/icons/Navigation'
 import logo from '../img/logo.png'
 import clip from '../img/icon_clip.svg'
 import calendar from '../img/icon_calender.svg'
@@ -54,6 +57,7 @@ class CalendarInput extends Component {
     return (
       <Calendar
         onSelect={(startDate, endDate, validDateRange) => this.handleSelect(startDate, endDate, validDateRange)}
+        style={{ flexDirection: "row" }}
       />
     );
   }
@@ -64,6 +68,7 @@ class MailboxIndex extends Component {
     super(props);
     this.orderByDate = this.orderByDate.bind(this);
     this.calendarOpenClick = this.calendarOpenClick.bind(this)
+    this.calendarCancelClick = this.calendarCancelClick.bind(this)
     this.handleSetDate = this.handleSetDate.bind(this)
     this.doneSetDate = this.doneSetDate.bind(this)
     this.updateMail = this.updateMail.bind(this)
@@ -107,7 +112,7 @@ class MailboxIndex extends Component {
         </div>
         <div className={classes.tableInnerItem + " " + classes.innerItemDate}>
           {mail.attachedfile ? <div className={classes.innerItemClip}><img src={clip} alt="attached file（アイコン）" /></div> : ""}
-          {mail.date}
+          {replaceToSlash(mail.date)}
         </div>
       </div>
     ));
@@ -147,6 +152,15 @@ class MailboxIndex extends Component {
     }))
   }
 
+  async calendarCancelClick() {
+    await this.setState((prevState) => ({
+      startDate: prevState.startDate,
+      endDate: prevState.endDate,
+      validDateRange: prevState.validDateRange,
+    }))
+    this.calendarOpenClick()
+  }
+
   async updateMail() {
     await this.setState({
       startDate: '',
@@ -165,11 +179,31 @@ class MailboxIndex extends Component {
     endDate = this.state.endDate
 
     const calendarElement = 
-      <div style={{ position: "absolute", zIndex: 2 }}>
+      <div className={classes.calendarInner}>
         <CalendarInput 
           onDateChange={this.handleSetDate}
         />
-        <Button variant="contained" color="secondary" onClick={this.doneSetDate}>Done</Button>
+        <Fab
+          variant="extended"
+          size="large"
+          color="secondary"
+          aria-label="done"
+          className={classes.doneButton}
+          onClick={this.doneSetDate}
+        >
+          <NavigationIcon  />
+          Done
+        </Fab>
+        <Fab
+          size="small"
+          color="primary"
+          aria-label="cancel"
+          className={classes.cancelButton}
+          onClick={this.calendarOpenClick}
+        >
+          <CloseIcon />
+        </Fab>
+        
       </div>
     const modalOverlay = 
       <div className={classes.modalBg} onClick={this.calendarOpenClick}></div>
@@ -177,7 +211,7 @@ class MailboxIndex extends Component {
     return (
       <React.Fragment>
         <div className={classes.root}>
-          <div style={{ position: "relative" }}>
+          <div style={{ position: "relative", width: "100%", height: "100%" }}>
             {this.state.calendarIsOpen ? calendarElement : null}
           </div>
           {this.state.calendarIsOpen ? modalOverlay : null}

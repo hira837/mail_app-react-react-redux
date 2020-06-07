@@ -189,14 +189,33 @@ export const commonStyles = theme => ({
     position: "fixed",
     right: 12,
     bottom: 12,
+    zIndex: 2
   },
   updataButton: {
     position: "fixed",
     left: 12,
     bottom: 12,
   },
+  doneButton: {
+    [theme.breakpoints.up('sm')]: {
+      marginTop: "15px",
+      marginRight: "15px",
+    },
+    [theme.breakpoints.down('sm')]: {
+      position: "fixed",
+      right: "10px",
+      top: "25px",
+    }
+  },
+  cancelButton: {
+    [theme.breakpoints.down('sm')]: {
+      position: "fixed",
+      right: "10px",
+      top: "80px",
+    }
+  },
   modalBg: {
-    position: "fixed", zIndex: 1, top: 0, left: 0, width: "100%", height: "120%", backgroundColor: "rgba(0,0,0,0.75)"
+    position: "fixed", zIndex: 3, top: 0, left: 0, width: "100%", height: "120%", backgroundColor: "rgba(0,0,0,0.75)"
   },
   logo: {
     width: "100%",
@@ -240,6 +259,12 @@ export const commonStyles = theme => ({
       width: "20px",
       height: "20px"
     },
+  },
+  calendarInner: {
+    width: "100%",
+    position: "absolute", 
+    zIndex: 4, 
+    overflow: "hidden", 
   },
   searchItem: {
     height: "50px",
