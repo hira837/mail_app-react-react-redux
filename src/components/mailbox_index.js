@@ -120,9 +120,9 @@ class MailboxIndex extends Component {
       sorted: !prevState.sorted,
     }));
     if (this.state.sorted) {
-      this.props.sortByDesc();
+      this.props.sortByDesc(this.state.startDate, this.state.endDate, this.state.validDateRange);
     } else {
-      this.props.sortByAsc();
+      this.props.sortByAsc(this.state.startDate, this.state.endDate, this.state.validDateRange);
     }
   }
 
@@ -225,10 +225,9 @@ const mapStateToProps = state => ({
 })
 const mapDispatchToProps = (dispatch) => ({
   readMails: () => dispatch(readMails()),
-  sortByAsc: () => dispatch(sortByAsc()),
-  sortByDesc: () => dispatch(sortByDesc()),
+  sortByAsc: (startDate, endDate, validDateRange) => dispatch(sortByAsc(startDate, endDate, validDateRange)),
+  sortByDesc: (startDate, endDate, validDateRange) => dispatch(sortByDesc(startDate, endDate, validDateRange)),
   filterByDate: (startDate, endDate, validDateRange) => dispatch(filterByDate(startDate, endDate, validDateRange)),
 })
-// const mapDispatchToProps = ({ readMails, sortByAsc, sortByDesc, filterByDate(startDate) })
 
 export default connect(mapStateToProps, mapDispatchToProps)(withStyles(commonStyles)(MailboxIndex))

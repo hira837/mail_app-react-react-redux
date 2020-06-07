@@ -22,7 +22,7 @@ export const commonStyles = theme => ({
       height: "50px",
     },
     [theme.breakpoints.down('sm')]: {
-      height: "30px",
+      height: "40px",
     }
   },
   titleItem: {
@@ -31,7 +31,7 @@ export const commonStyles = theme => ({
     alignItems: "center",
     boxSizing: "border-box",
     [theme.breakpoints.down('sm')]: {
-      fontSize: "1rem",
+      fontSize: ".8rem",
     }
   },
   titleFrom: {
@@ -43,7 +43,7 @@ export const commonStyles = theme => ({
     [theme.breakpoints.down('sm')]: {
       marginLeft: "8px",
       paddingLeft: "8px",
-      borderLeft: "1px solid #000",
+      borderLeft: "1px solid #ddd",
       whiteSpace: "no-wrap"
     },
     [theme.breakpoints.up('sm')]: {
@@ -54,7 +54,7 @@ export const commonStyles = theme => ({
     [theme.breakpoints.down('sm')]: {
       marginLeft: "8px",
       paddingLeft: "8px",
-      borderLeft: "1px solid #000"
+      borderLeft: "1px solid #ddd"
     },
     [theme.breakpoints.up('sm')]: {
       width: "45%"
@@ -64,7 +64,7 @@ export const commonStyles = theme => ({
     [theme.breakpoints.down('sm')]: {
       marginLeft: "8px",
       paddingLeft: "8px",
-      borderLeft: "1px solid #000"
+      borderLeft: "1px solid #ddd"
     },
     [theme.breakpoints.up('sm')]: {
       width: "15%",
@@ -220,7 +220,7 @@ export const commonStyles = theme => ({
     flexDirection: "row",
     padding: "10px",
     [theme.breakpoints.down('sm')]: {
-      width: "55%",
+      width: "auto",
       height: "40px"
     },
   },
@@ -274,7 +274,3 @@ export const commonStyles = theme => ({
     height: "auto"
   }
 });
-
-export const mailStyles = theme => ({
-  
-})

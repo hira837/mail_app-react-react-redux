@@ -69,13 +69,13 @@ export const putMail = values => async dispatch => {
   dispatch({ type: UPDATE_MAIL, values });
 }
 
-export const sortByAsc = () => async dispatch => {
+export const sortByAsc = (startDate, endDate, validDateRange) => async dispatch => {
   const response = await (await fetch("data/allMails.json")).json()
-  dispatch({ type: SORT_BY_ASC, response });
+  dispatch({ type: SORT_BY_ASC, response, startDate, endDate, validDateRange, response });
 }
-export const sortByDesc = () => async dispatch => {
+export const sortByDesc = (startDate, endDate, validDateRange) => async dispatch => {
   const response = await (await fetch("data/allMails.json")).json()
-  dispatch({ type: SORT_BY_DESC, response });
+  dispatch({ type: SORT_BY_DESC, response, startDate, endDate, validDateRange, response });
 }
 
 export const filterByDate = (startDate, endDate, validDateRange) => async dispatch => {
