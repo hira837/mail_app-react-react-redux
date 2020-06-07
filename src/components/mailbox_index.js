@@ -14,6 +14,8 @@ import clip from '../img/icon_clip.svg'
 import calendar from '../img/icon_calender.svg'
 import search from '../img/icon_search.svg'
 import iconMailSp from '../img/icon_mail_sp.svg'
+import IconButton from '@material-ui/core/IconButton'
+import CachedIcon from '@material-ui/icons/Cached'
 
 // Date Picker
 import Calendar from "react-date-range-calendar";
@@ -64,6 +66,7 @@ class MailboxIndex extends Component {
     this.calendarOpenClick = this.calendarOpenClick.bind(this)
     this.handleSetDate = this.handleSetDate.bind(this)
     this.doneSetDate = this.doneSetDate.bind(this)
+    this.updateMail = this.updateMail.bind(this)
     this.state = {
       sorted: true,
       calendarIsOpen: false,
@@ -145,6 +148,15 @@ class MailboxIndex extends Component {
     }))
   }
 
+  async updateMail() {
+    await this.setState({
+      startDate: '',
+      endDate: '',
+      validDateRange: []
+    })
+    this.props.readMails()
+  }
+
   render() {
     const { classes } = this.props;
     const ascButton = <ArrowDropUpIcon fontSize="small" onClick={this.orderByDate} />,
@@ -182,10 +194,14 @@ class MailboxIndex extends Component {
               <img src={search} className={classes.searchIcon}/>
             </div>
           </div>
-          
 
           <div className={classes.resultItem}>
             Results: {this.returnMailsLength() <= 1 ? this.returnMailsLength() + "mail" : this.returnMailsLength() + "mails" }
+            <IconButton aria-label="update"
+              onClick={this.updateMail}
+              className={classes.updateButton}>
+              <CachedIcon/>
+            </IconButton>
           </div>
           
           <FloatingActionButton
