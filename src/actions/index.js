@@ -71,11 +71,11 @@ export const putMail = values => async dispatch => {
 
 export const sortByAsc = (startDate, endDate, validDateRange) => async dispatch => {
   const response = await (await fetch("data/allMails.json")).json()
-  dispatch({ type: SORT_BY_ASC, response, startDate, endDate, validDateRange, response });
+  dispatch({ type: SORT_BY_ASC, response, startDate, endDate, validDateRange });
 }
 export const sortByDesc = (startDate, endDate, validDateRange) => async dispatch => {
   const response = await (await fetch("data/allMails.json")).json()
-  dispatch({ type: SORT_BY_DESC, response, startDate, endDate, validDateRange, response });
+  dispatch({ type: SORT_BY_DESC, response, startDate, endDate, validDateRange });
 }
 
 export const filterByDate = (startDate, endDate, validDateRange) => async dispatch => {

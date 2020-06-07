@@ -70,7 +70,7 @@ class mailboxShow extends Component {
   }
 
   render() {
-    const { handleSubmit, pristine, submitting, invalid } = this.props
+    const { handleSubmit } = this.props
     const style = { margin: 12 }
 
     return (
@@ -93,7 +93,6 @@ class mailboxShow extends Component {
         </div>
         
         <div>
-          {/* <RaisedButton label="Submit" style={style} type="submit" disabled={pristine || submitting || invalid}/> */}
           <RaisedButton label="Cancel" style={style} containerElement={<Link to="/" />} />
           <Button
             variant="contained"

@@ -23,12 +23,12 @@ import Calendar from "react-date-range-calendar";
 import { readMails, sortByAsc, sortByDesc, filterByDate } from '../actions'
 
 function getWindowSize() {
-  var w = window,
+  var ww = window,
     d = document,
     e = d.documentElement,
     g = d.getElementsByTagName('body')[0],
-    w = w.innerWidth || e.clientWidth || g.clientWidth,
-    h = w.innerHeight || e.clientHeight || g.clientHeight;
+    w = ww.innerWidth || e.clientWidth || g.clientWidth,
+    h = ww.innerHeight || e.clientHeight || g.clientHeight;
 
   return {
     width: w,
@@ -81,16 +81,15 @@ class MailboxIndex extends Component {
   componentDidMount() {
     this.props.readMails();
     if(getWindowSize().width < this.state.breakPoint) {
-      this.state.deviceIsSp = true
-      console.log(this.state.deviceIsSp)
+      this.setState({ deviceIsSp: true })
     } else {
-      this.state.deviceIsSp = false
+      this.setState({ deviceIsSp: false })
     }
   }
 
   renderEvents() {
     const { classes } = this.props;
-    const spMail = <div className={classes.iconMailSp}><img className={classes.iconMailSpItem} src={iconMailSp} /></div>
+    const spMail = <div className={classes.iconMailSp}><img className={classes.iconMailSpItem} src={iconMailSp} alt="from to（アイコン）" /></div>
     return _.map(this.props.mails, (mail) => (
       <div key={mail.id} className={classes.tableInnerRow}>
         {this.state.deviceIsSp ? spMail : ''}
@@ -107,7 +106,7 @@ class MailboxIndex extends Component {
           <Link to={`/mailbox/${mail.id}`} style={{ color: "#0288d1"}}>{mail.subject}</Link>
         </div>
         <div className={classes.tableInnerItem + " " + classes.innerItemDate}>
-          {mail.attachedfile ? <div className={classes.innerItemClip}><img src={clip} /></div> : ""}
+          {mail.attachedfile ? <div className={classes.innerItemClip}><img src={clip} alt="attached file（アイコン）" /></div> : ""}
           {mail.date}
         </div>
       </div>
@@ -185,13 +184,13 @@ class MailboxIndex extends Component {
 
           <div className={classes.calendarParent}>
             <div className={classes.calendarInput} onClick={this.calendarOpenClick}>
-              <div><img src={calendar} className={classes.calendarIcon} /></div>
+              <div><img src={calendar} className={classes.calendarIcon} alt="Calendar（アイコン）" /></div>
               <div className={classes.calendarItem}>{replaceToSlash(startDate)}</div>
               <div>-</div>
               <div className={classes.calendarItem}>{replaceToSlash(endDate)}</div>
             </div>
             <div className={classes.searchItem}>
-              <img src={search} className={classes.searchIcon}/>
+              <img src={search} className={classes.searchIcon} alt="Search（アイコン）"/>
             </div>
           </div>
 
@@ -222,7 +221,7 @@ class MailboxIndex extends Component {
               </div>
             </div>
       
-            {this.returnMailsLength() > 0 ? this.renderEvents() : <div className={classes.logo}><img src={logo} /></div>}
+            {this.returnMailsLength() > 0 ? this.renderEvents() : <div className={classes.logo}><img src={logo} alt="logo icon（アイコン）"/></div>}
 
           </div>
 
