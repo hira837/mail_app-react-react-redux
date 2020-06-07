@@ -1,0 +1,30 @@
+{
+  "files": {
+    "main.css": "./build/static/css/main.5ecd60fb.chunk.css",
+    "main.js": "./build/static/js/main.9589db7d.chunk.js",
+    "main.js.map": "./build/static/js/main.9589db7d.chunk.js.map",
+    "runtime-main.js": "./build/static/js/runtime-main.49b1ff75.js",
+    "runtime-main.js.map": "./build/static/js/runtime-main.49b1ff75.js.map",
+    "static/css/2.af3c1da9.chunk.css": "./build/static/css/2.af3c1da9.chunk.css",
+    "static/js/2.c08f8fd4.chunk.js": "./build/static/js/2.c08f8fd4.chunk.js",
+    "static/js/2.c08f8fd4.chunk.js.map": "./build/static/js/2.c08f8fd4.chunk.js.map",
+    "index.html": "./build/index.html",
+    "precache-manifest.f0f36139fe5748e1f777b98b9502d27b.js": "./build/precache-manifest.f0f36139fe5748e1f777b98b9502d27b.js",
+    "service-worker.js": "./build/service-worker.js",
+    "static/css/2.af3c1da9.chunk.css.map": "./build/static/css/2.af3c1da9.chunk.css.map",
+    "static/css/main.5ecd60fb.chunk.css.map": "./build/static/css/main.5ecd60fb.chunk.css.map",
+    "static/js/2.c08f8fd4.chunk.js.LICENSE.txt": "./build/static/js/2.c08f8fd4.chunk.js.LICENSE.txt",
+    "static/media/icon_arrow02.svg": "./build/static/media/icon_arrow02.a8497fb7.svg",
+    "static/media/icon_calender.svg": "./build/static/media/icon_calender.e058455f.svg",
+    "static/media/icon_clip.svg": "./build/static/media/icon_clip.fae31ac0.svg",
+    "static/media/icon_mail_sp.svg": "./build/static/media/icon_mail_sp.b845eca9.svg",
+    "static/media/icon_search.svg": "./build/static/media/icon_search.04846dcd.svg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.49b1ff75.js",
+    "static/css/2.af3c1da9.chunk.css",
+    "static/js/2.c08f8fd4.chunk.js",
+    "static/css/main.5ecd60fb.chunk.css",
+    "static/js/main.9589db7d.chunk.js"
+  ]
+}
