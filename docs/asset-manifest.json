@@ -1,0 +1,30 @@
+{
+  "files": {
+    "main.css": "/mail_app-react-react-redux/static/css/main.5ecd60fb.chunk.css",
+    "main.js": "/mail_app-react-react-redux/static/js/main.25516ab0.chunk.js",
+    "main.js.map": "/mail_app-react-react-redux/static/js/main.25516ab0.chunk.js.map",
+    "runtime-main.js": "/mail_app-react-react-redux/static/js/runtime-main.31c543a4.js",
+    "runtime-main.js.map": "/mail_app-react-react-redux/static/js/runtime-main.31c543a4.js.map",
+    "static/css/2.af3c1da9.chunk.css": "/mail_app-react-react-redux/static/css/2.af3c1da9.chunk.css",
+    "static/js/2.f870fb62.chunk.js": "/mail_app-react-react-redux/static/js/2.f870fb62.chunk.js",
+    "static/js/2.f870fb62.chunk.js.map": "/mail_app-react-react-redux/static/js/2.f870fb62.chunk.js.map",
+    "index.html": "/mail_app-react-react-redux/index.html",
+    "precache-manifest.f0f711badcaa0050edd33fdbe628cce9.js": "/mail_app-react-react-redux/precache-manifest.f0f711badcaa0050edd33fdbe628cce9.js",
+    "service-worker.js": "/mail_app-react-react-redux/service-worker.js",
+    "static/css/2.af3c1da9.chunk.css.map": "/mail_app-react-react-redux/static/css/2.af3c1da9.chunk.css.map",
+    "static/css/main.5ecd60fb.chunk.css.map": "/mail_app-react-react-redux/static/css/main.5ecd60fb.chunk.css.map",
+    "static/js/2.f870fb62.chunk.js.LICENSE.txt": "/mail_app-react-react-redux/static/js/2.f870fb62.chunk.js.LICENSE.txt",
+    "static/media/icon_arrow02.svg": "/mail_app-react-react-redux/static/media/icon_arrow02.a8497fb7.svg",
+    "static/media/icon_calender.svg": "/mail_app-react-react-redux/static/media/icon_calender.e058455f.svg",
+    "static/media/icon_clip.svg": "/mail_app-react-react-redux/static/media/icon_clip.fae31ac0.svg",
+    "static/media/icon_mail_sp.svg": "/mail_app-react-react-redux/static/media/icon_mail_sp.b845eca9.svg",
+    "static/media/icon_search.svg": "/mail_app-react-react-redux/static/media/icon_search.04846dcd.svg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.31c543a4.js",
+    "static/css/2.af3c1da9.chunk.css",
+    "static/js/2.f870fb62.chunk.js",
+    "static/css/main.5ecd60fb.chunk.css",
+    "static/js/main.25516ab0.chunk.js"
+  ]
+}
