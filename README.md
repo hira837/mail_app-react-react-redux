@@ -1,12 +1,3 @@
-## Component
-- functional component
-- class component
+# Mail Application Demo with React / React redux
 
-## Library
-- redux thunk action creator の非同期処理
-
-## Calendar
-- カレンダーのスタイル
-- 絞り込み後の並び替え
-
-## Responsive
+[Hennge Challeng](https://challenge.hennge.com/challenge-details/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOlsiZ2Z5eG04NjhAZ21haWwuY29tIl0sImlzcyI6Imhlbm5nZS1hZG1pc3Npb24tY2hhbGxlbmdlIiwic3ViIjoiY2hhbGxlbmdlIn0.m052jdmxyBJ_TIpTFOAiRBgE1WrSfwIvkY-QKNlw0oo)
