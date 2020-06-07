@@ -9,6 +9,7 @@
     "@testing-library/react": "^9.3.2",
     "@testing-library/user-event": "^7.1.2",
     "axios": "^0.19.2",
+    "gh-pages": "^3.0.0",
     "material-ui": "0.20.0",
     "react": "^16.13.1",
     "react-date-range-calendar": "^0.1.14",
@@ -23,9 +24,10 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build",
+    "build": "react-scripts build && mv build docs",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "deploy": "gh-pages -d build"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -42,5 +44,5 @@
       "last 1 safari version"
     ]
   },
-  "homepage": "./build"
+  "homepage": "https://hira837.github.io/mail_app-react-react-redux/"
 }
