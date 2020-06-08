@@ -10,7 +10,7 @@
 /playground
 
 # production
-/build
+# /build
 /public
 
 # misc
